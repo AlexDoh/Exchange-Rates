@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
@@ -12,7 +11,7 @@ import java.util.Objects;
 public class CurrencyInfo {
 
     private String type;
-    private LocalDateTime updated;
+    private String updated;
     private BigDecimal bid;
     private BigDecimal bidChange;
     private BigDecimal ask;

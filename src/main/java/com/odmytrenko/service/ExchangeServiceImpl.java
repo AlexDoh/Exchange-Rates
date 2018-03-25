@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,12 +50,11 @@ public class ExchangeServiceImpl implements ExchangeService {
                 currencyTable.getElementsByTag("tr").forEach((row) -> {
                     CurrencyInfo currencyInfo = new CurrencyInfo();
 
-                    currencyInfo.setType(row.getElementsByClass("ipsKursTable_currency").get(0).getElementsByTag("a").get(0).text());
+                    currencyInfo.setType(row.getElementsByClass("ipsKursTable_currency")
+                            .get(0).getElementsByTag("a").get(0).text());
 
-                    currencyInfo.setUpdated(LocalDateTime.parse(
-                            row.getElementsByClass("ipsKursTable_updated").get(0).getElementsByTag(
-                                    "time").get(0).attr("title"),
-                            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm' '")));
+                    currencyInfo.setUpdated(row.getElementsByClass("ipsKursTable_updated")
+                            .get(0).getElementsByTag("time").get(0).attr("datetime"));
 
                     currencyInfo.setBid(getRateValue(row, "bid"));
                     currencyInfo.setBidChange(getRateChangeValue(row, "bid"));
