@@ -17,7 +17,7 @@ public class ExchangeController {
     @Autowired
     private ExchangeService exchangeService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/rates", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Set<BankInfo> getBankInfos(){
         return exchangeService.getBankInfos();
