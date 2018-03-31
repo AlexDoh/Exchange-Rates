@@ -13,3 +13,6 @@ buildNumber.properties
 
 .idea/
 *.iml
+exchange-client/package-lock.json
+exchange-client/node
+exchange-server/src/main/resources/static
