@@ -18,6 +18,14 @@ import java.util.Set;
 public class ExchangeServiceImpl implements ExchangeService {
     @Override
     public Set<BankInfo> getBankInfos() {
+
+        try {
+            String json = Jsoup.connect("http://resources.finance.ua/ru/public/currency-cash.json").ignoreContentType(true).execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         Set<BankInfo> bankInfoSet = new HashSet<>();
 
         for (int i = 1; i < 400; i++) {
