@@ -1,19 +1,6 @@
 @import '../../styles';
 @import '~bootstrap/scss/bootstrap';
 
-body {
-  padding-top: 50px;
-}
-
-.main-navbar {
-  background-color: $color-green;
-}
-
-.menu-element {
-  background-color: $color-dark-blue;
-  color: $color-white;
-}
-
 .sidebar {
   position: fixed;
   top: 51px;
@@ -42,13 +29,9 @@ body {
   }
 }
 
-.placeholders {
-  padding-bottom: 3rem;
-
-  img {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
+.menu-element {
+  background-color: $color-dark-blue;
+  color: $color-white;
 }
 
 @include media-breakpoint-down(xs) {
