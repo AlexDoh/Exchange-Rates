@@ -1,6 +1,6 @@
 package com.odmytrenko.controller;
 
-import com.odmytrenko.model.BankInfo;
+import com.odmytrenko.model.kurs.BankInfo;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,7 +1,9 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.BankInfo;
-import com.odmytrenko.model.CurrencyInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.odmytrenko.model.finance.FinanceServiceResponse;
+import com.odmytrenko.model.kurs.BankInfo;
+import com.odmytrenko.model.kurs.CurrencyInfo;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,15 +14,19 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Service
 public class ExchangeServiceImpl implements ExchangeService {
+
     @Override
     public Set<BankInfo> getBankInfos() {
 
         try {
             String json = Jsoup.connect("http://resources.finance.ua/ru/public/currency-cash.json").ignoreContentType(true).execute().body();
+            ObjectMapper mapper = new ObjectMapper(); // just need one
+            FinanceServiceResponse response = mapper.readValue(json, FinanceServiceResponse.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

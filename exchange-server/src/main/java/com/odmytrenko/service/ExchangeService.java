@@ -1,6 +1,6 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.BankInfo;
+import com.odmytrenko.model.kurs.BankInfo;
 
 import java.util.Set;
 
