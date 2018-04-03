@@ -10,14 +10,14 @@ import java.util.Set;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
-public class FinanceProviderInfo implements ExchangeProvider {
+public class FinanceProviderInfo<T> implements ExchangeProvider {
 
     @JsonProperty
     private String sourceId;
     @JsonProperty
     private String date;
     @JsonProperty
-    private Set<FinanceOrganization> organizations;
+    private Set<T> organizations;
     @JsonProperty
     private Map<Integer, String> orgTypes;
     @JsonProperty

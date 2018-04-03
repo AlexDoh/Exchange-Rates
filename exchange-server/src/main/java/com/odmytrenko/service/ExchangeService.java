@@ -1,11 +1,11 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.dto.ExchangeInfo;
+import com.odmytrenko.dto.ResponseExchangeInfo;
 import com.odmytrenko.model.ExchangeProvider;
 
 public interface ExchangeService {
 
     ExchangeProvider getExchangeProviderInfo();
 
-    ExchangeInfo getExchangeInfo();
+    ResponseExchangeInfo getExchangeInfo();
 }

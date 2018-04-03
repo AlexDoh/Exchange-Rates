@@ -1,7 +1,7 @@
 package com.odmytrenko.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.odmytrenko.dto.ExchangeInfo;
+import com.odmytrenko.dto.ResponseExchangeInfo;
 import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
 import org.jsoup.Jsoup;
@@ -26,7 +26,7 @@ public class FinanceExchangeService implements ExchangeService {
     }
 
     @Override
-    public ExchangeInfo getExchangeInfo() {
+    public ResponseExchangeInfo getExchangeInfo() {
         return null;
     }
 }

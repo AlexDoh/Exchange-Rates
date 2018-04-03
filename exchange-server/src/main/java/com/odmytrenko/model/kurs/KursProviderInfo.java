@@ -9,8 +9,8 @@ import java.util.Set;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
-public class KursProviderInfo implements ExchangeProvider {
+public class KursProviderInfo<T> implements ExchangeProvider {
 
     @JsonProperty
-    private Set<KursOrganization> organizations;
+    private Set<T> organizations;
 }

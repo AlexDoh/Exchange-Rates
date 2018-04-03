@@ -1,8 +1,10 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.dto.ExchangeInfo;
+import com.odmytrenko.dto.ResponseExchangeCurrencyRates;
+import com.odmytrenko.dto.ResponseExchangeInfo;
+import com.odmytrenko.dto.ResponseExchangeOrganization;
 import com.odmytrenko.model.kurs.KursOrganization;
-import com.odmytrenko.model.kurs.KursCurrencyInfo;
+import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursProviderInfo;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jsoup.Jsoup;
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -22,8 +26,8 @@ import java.util.Set;
 public class KursExchangeService implements ExchangeService {
 
     @Override
-    public KursProviderInfo getExchangeProviderInfo() {
-        KursProviderInfo kursProviderInfo = new KursProviderInfo();
+    public KursProviderInfo<KursOrganization> getExchangeProviderInfo() {
+        KursProviderInfo<KursOrganization> kursProviderInfo = new KursProviderInfo<>();
         Set<KursOrganization> kursOrganizationSet = new HashSet<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
@@ -32,7 +36,7 @@ public class KursExchangeService implements ExchangeService {
             url.append(i);
             url.append("-a/");
 
-            KursOrganization kursOrganization = new KursOrganization();
+            KursOrganization<KursCurrencyRates> kursOrganization = new KursOrganization<>();
 
             try {
                 Document document = Jsoup.connect(url.toString()).ignoreHttpErrors(true).get();
@@ -45,7 +49,10 @@ public class KursExchangeService implements ExchangeService {
                 kursOrganization.setTitle(bankName.get(0).text().replace("Курс валют — ", ""));
                 kursOrganization.setLink(document.location());
                 kursOrganization.setAddress(document.getElementsByAttributeValue("title", "Показать на карте").text());
-                kursOrganization.setPhone(document.select("div.ipsGrid_span3:contains(Телефоны)").get(0).siblingElements().get(0).text());
+                Elements phone = document.select("div.ipsGrid_span3:contains(Телефоны)");
+                if (!phone.isEmpty()) {
+                    kursOrganization.setPhone(phone.get(0).siblingElements().get(0).text());
+                }
 
                 Elements currencyTables = document.getElementsByTag("tbody");
                 Element currencyTable;
@@ -54,25 +61,25 @@ public class KursExchangeService implements ExchangeService {
                 } else {
                     currencyTable = currencyTables.get(0);
                 }
-                Set<KursCurrencyInfo> kursCurrencyInfoSet = new HashSet<>();
+                Map<String, KursCurrencyRates> kursCurrencyRatesMap = new HashMap<>();
                 currencyTable.getElementsByTag("tr").forEach((row) -> {
-                    KursCurrencyInfo kursCurrencyInfo = new KursCurrencyInfo();
+                    String currencyType = row.getElementsByClass("ipsKursTable_currency")
+                    .get(0).getElementsByTag("a").get(0).text();
 
-                    kursCurrencyInfo.setType(row.getElementsByClass("ipsKursTable_currency")
-                    .get(0).getElementsByTag("a").get(0).text());
+                    KursCurrencyRates kursCurrencyRates = new KursCurrencyRates();
 
-                    kursCurrencyInfo.setUpdated(row.getElementsByClass("ipsKursTable_updated")
+                    kursCurrencyRates.setUpdated(row.getElementsByClass("ipsKursTable_updated")
                     .get(0).getElementsByTag("time").get(0).attr("datetime"));
 
-                    kursCurrencyInfo.setBid(getRateValue(row, "bid"));
-                    kursCurrencyInfo.setBidChange(getRateChangeValue(row, "bid"));
+                    kursCurrencyRates.setBid(getRateValue(row, "bid"));
+                    kursCurrencyRates.setBidChange(getRateChangeValue(row, "bid"));
 
-                    kursCurrencyInfo.setAsk(getRateValue(row, "ask"));
-                    kursCurrencyInfo.setAskChange(getRateChangeValue(row, "ask"));
+                    kursCurrencyRates.setAsk(getRateValue(row, "ask"));
+                    kursCurrencyRates.setAskChange(getRateChangeValue(row, "ask"));
 
-                    kursCurrencyInfoSet.add(kursCurrencyInfo);
+                    kursCurrencyRatesMap.put(currencyType, kursCurrencyRates);
                 });
-                kursOrganization.setCurrencyInfos(kursCurrencyInfoSet);
+                kursOrganization.setCurrencies(kursCurrencyRatesMap);
                 kursOrganizationSet.add(kursOrganization);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,10 +89,23 @@ public class KursExchangeService implements ExchangeService {
     }
 
     @Override
-    public ExchangeInfo getExchangeInfo() {
-        ExchangeInfo exchangeInfo = new ExchangeInfo();
-        KursProviderInfo exchangeProvider = this.getExchangeProviderInfo();
-        return exchangeInfo;
+    public ResponseExchangeInfo getExchangeInfo() {
+        ResponseExchangeInfo responseExchangeInfo = new ResponseExchangeInfo();
+        KursProviderInfo<KursOrganization> exchangeProvider = this.getExchangeProviderInfo();
+        Set<KursOrganization> kursOrganizations = exchangeProvider.getOrganizations();
+        Set<ResponseExchangeOrganization> exchangeOrganizations = new HashSet<>();
+        kursOrganizations.forEach(organization -> {
+            ResponseExchangeOrganization<ResponseExchangeCurrencyRates> responseExchangeOrganization = new ResponseExchangeOrganization<>();
+            responseExchangeOrganization.setAddress(organization.getAddress());
+            responseExchangeOrganization.setLink(organization.getLink());
+            responseExchangeOrganization.setPhone(organization.getPhone());
+            responseExchangeOrganization.setTitle(organization.getTitle());
+            responseExchangeOrganization.setCurrencies(organization.getCurrencies());
+
+            exchangeOrganizations.add(responseExchangeOrganization);
+        });
+        responseExchangeInfo.setOrganizations(exchangeOrganizations);
+        return responseExchangeInfo;
     }
 
     private BigDecimal getRateValue(Element currencyRow, String rateType) {
