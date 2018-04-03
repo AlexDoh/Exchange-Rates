@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.odmytrenko.model.ExchangeOrganization;
 import lombok.Data;
-
-import java.util.Map;
+import lombok.EqualsAndHashCode;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class FinanceOrganization<T> implements ExchangeOrganization {
+public class FinanceOrganization extends ExchangeOrganization<FinanceCurrencyRates> {
 
     @JsonProperty
     private String id;
@@ -20,17 +20,7 @@ public class FinanceOrganization<T> implements ExchangeOrganization {
     @JsonProperty
     private Boolean branch;
     @JsonProperty
-    private String title;
-    @JsonProperty
     private String regionId;
     @JsonProperty
     private String cityId;
-    @JsonProperty
-    private String phone;
-    @JsonProperty
-    private String address;
-    @JsonProperty
-    private String link;
-    @JsonProperty
-    private Map<String, T> currencies;
 }
