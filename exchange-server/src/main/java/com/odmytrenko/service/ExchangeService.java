@@ -1,10 +1,11 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.kurs.BankInfo;
-
-import java.util.Set;
+import com.odmytrenko.dto.ExchangeInfo;
+import com.odmytrenko.model.ExchangeProvider;
 
 public interface ExchangeService {
 
-    Set<BankInfo> getBankInfos();
+    ExchangeProvider getExchangeProviderInfo();
+
+    ExchangeInfo getExchangeInfo();
 }
