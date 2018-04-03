@@ -1,6 +1,6 @@
 package com.odmytrenko.controller;
 
-import com.odmytrenko.dto.ExchangeInfo;
+import com.odmytrenko.dto.ResponseExchangeInfo;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ public class ExchangeController {
 
     @RequestMapping(path = "/rates", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ExchangeInfo getBankInfos(){
+    public ResponseExchangeInfo getBankInfos(){
         return exchangeService.getExchangeInfo();
     }
 }

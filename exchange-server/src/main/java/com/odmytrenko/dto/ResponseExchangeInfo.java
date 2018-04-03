@@ -2,23 +2,19 @@ package com.odmytrenko.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.odmytrenko.model.finance.FinanceCurrencyRates;
 import lombok.Data;
 
 import java.util.Map;
+import java.util.Set;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
-public class ExchangeOrganization {
+public class ResponseExchangeInfo {
 
     @JsonProperty
-    private String title;
+    private Set<ResponseExchangeOrganization> organizations;
     @JsonProperty
-    private String phone;
+    private Map<Integer, String> orgTypes;
     @JsonProperty
-    private String address;
-    @JsonProperty
-    private String link;
-    @JsonProperty
-    private Map<String, FinanceCurrencyRates> currencies;
+    private Map<String, String> currencies;
 }
