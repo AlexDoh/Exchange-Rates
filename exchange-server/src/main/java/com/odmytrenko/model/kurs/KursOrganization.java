@@ -4,19 +4,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Objects;
 import java.util.Set;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
-public class BankInfo {
+public class KursOrganization {
 
     @JsonProperty
-    private String bankName;
+    private String title;
     @JsonProperty
     private String link;
     @JsonProperty
-    private String headAddress;
+    private String address;
     @JsonProperty
-    private Set<CurrencyInfo> currencyInfos;
+    private String phone;
+    @JsonProperty
+    private Set<KursCurrencyInfo> currencyInfos;
 }

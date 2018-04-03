@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
-public class CurrencyInfo {
+public class KursCurrencyInfo {
 
     private String type;
     private String updated;

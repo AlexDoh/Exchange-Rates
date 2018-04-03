@@ -5,12 +5,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
 public class FinanceCurrencyRates {
 
     @JsonProperty
-    private String ask;
+    private BigDecimal bid;
     @JsonProperty
-    private String bid;
+    private BigDecimal bidChange;
+    @JsonProperty
+    private BigDecimal ask;
+    @JsonProperty
+    private BigDecimal askChange;
+
 }
