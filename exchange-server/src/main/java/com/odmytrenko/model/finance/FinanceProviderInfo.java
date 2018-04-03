@@ -16,12 +16,6 @@ public class FinanceProviderInfo extends ExchangeProvider<FinanceOrganization> {
     @JsonProperty
     private String sourceId;
     @JsonProperty
-    private String date;
-    @JsonProperty
-    private Map<Integer, String> orgTypes;
-    @JsonProperty
-    private Map<String, String> currencies;
-    @JsonProperty
     private Map<String, String> regions;
     @JsonProperty
     private Map<String, String> cities;

@@ -1,8 +1,6 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.dto.ResponseExchangeInfo;
-import com.odmytrenko.dto.ResponseExchangeOrganization;
-import com.odmytrenko.model.ExchangeOrganization;
+import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.model.kurs.KursOrganization;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursProviderInfo;
@@ -24,7 +22,7 @@ import java.util.Set;
 public class KursExchangeService implements ExchangeService {
 
     @Override
-    public KursProviderInfo getExchangeProviderInfo() {
+    public ExchangeProvider getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
         Set<KursOrganization> kursOrganizationSet = new HashSet<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
@@ -62,12 +60,12 @@ public class KursExchangeService implements ExchangeService {
                 Map<String, KursCurrencyRates> kursCurrencyRatesMap = new HashMap<>();
                 currencyTable.getElementsByTag("tr").forEach((row) -> {
                     String currencyType = row.getElementsByClass("ipsKursTable_currency")
-                    .get(0).getElementsByTag("a").get(0).text();
+                        .get(0).getElementsByTag("a").get(0).text();
 
                     KursCurrencyRates kursCurrencyRates = new KursCurrencyRates();
 
                     kursCurrencyRates.setUpdated(row.getElementsByClass("ipsKursTable_updated")
-                    .get(0).getElementsByTag("time").get(0).attr("datetime"));
+                        .get(0).getElementsByTag("time").get(0).attr("datetime"));
 
                     kursCurrencyRates.setBid(getRateValue(row, "bid"));
                     kursCurrencyRates.setBidChange(getRateChangeValue(row, "bid"));
@@ -86,32 +84,12 @@ public class KursExchangeService implements ExchangeService {
         return kursProviderInfo;
     }
 
-    @Override
-    public ResponseExchangeInfo getExchangeInfo() {
-        ResponseExchangeInfo responseExchangeInfo = new ResponseExchangeInfo();
-        KursProviderInfo exchangeProvider = this.getExchangeProviderInfo();
-        Set<KursOrganization> kursOrganizations = exchangeProvider.getOrganizations();
-        Set<ResponseExchangeOrganization> exchangeOrganizations = new HashSet<>();
-        kursOrganizations.forEach((ExchangeOrganization organization) -> {
-            ResponseExchangeOrganization responseExchangeOrganization = new ResponseExchangeOrganization();
-            responseExchangeOrganization.setAddress(organization.getAddress());
-            responseExchangeOrganization.setLink(organization.getLink());
-            responseExchangeOrganization.setPhone(organization.getPhone());
-            responseExchangeOrganization.setTitle(organization.getTitle());
-            responseExchangeOrganization.setCurrencies(organization.getCurrencies());
-
-            exchangeOrganizations.add(responseExchangeOrganization);
-        });
-        responseExchangeInfo.setOrganizations(exchangeOrganizations);
-        return responseExchangeInfo;
-    }
-
     private String getRateValue(Element currencyRow, String rateType) {
         StringBuilder rateSelector = new StringBuilder(".ipsKursTable_rate[data-rate-type=");
         rateSelector.append(rateType);
         rateSelector.append(']');
         String rate = currencyRow.select(rateSelector.toString()).get(0)
-        .getElementsByClass("ipsKurs_rate").text().replace(',', '.');
+            .getElementsByClass("ipsKurs_rate").text().replace(',', '.');
         if (rate.isEmpty()) {
             return "0";
         } else {
@@ -124,7 +102,7 @@ public class KursExchangeService implements ExchangeService {
         rateSelector.append(rateType);
         rateSelector.append("_change]");
         String rate = currencyRow.select(rateSelector.toString()).get(0)
-        .getElementsByClass("ipsKurs_rateChange").text().replace(',', '.');
+            .getElementsByClass("ipsKurs_rateChange").text().replace(',', '.');
         if (rate.isEmpty()) {
             return "0";
         } else {
