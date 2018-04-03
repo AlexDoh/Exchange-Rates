@@ -12,4 +12,10 @@ public abstract class ExchangeCurrencyRates {
     private String bid;
     @JsonProperty
     private String ask;
+    @JsonProperty
+    private String updated;
+    @JsonProperty
+    private String bidChange;
+    @JsonProperty
+    private String askChange;
 }
