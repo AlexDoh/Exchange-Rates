@@ -1,12 +1,11 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.dto.ResponseExchangeCurrencyRates;
 import com.odmytrenko.dto.ResponseExchangeInfo;
 import com.odmytrenko.dto.ResponseExchangeOrganization;
+import com.odmytrenko.model.ExchangeOrganization;
 import com.odmytrenko.model.kurs.KursOrganization;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursProviderInfo;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -26,8 +24,8 @@ import java.util.Set;
 public class KursExchangeService implements ExchangeService {
 
     @Override
-    public KursProviderInfo<KursOrganization> getExchangeProviderInfo() {
-        KursProviderInfo<KursOrganization> kursProviderInfo = new KursProviderInfo<>();
+    public KursProviderInfo getExchangeProviderInfo() {
+        KursProviderInfo kursProviderInfo = new KursProviderInfo();
         Set<KursOrganization> kursOrganizationSet = new HashSet<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
@@ -36,7 +34,7 @@ public class KursExchangeService implements ExchangeService {
             url.append(i);
             url.append("-a/");
 
-            KursOrganization<KursCurrencyRates> kursOrganization = new KursOrganization<>();
+            KursOrganization kursOrganization = new KursOrganization();
 
             try {
                 Document document = Jsoup.connect(url.toString()).ignoreHttpErrors(true).get();
@@ -91,11 +89,11 @@ public class KursExchangeService implements ExchangeService {
     @Override
     public ResponseExchangeInfo getExchangeInfo() {
         ResponseExchangeInfo responseExchangeInfo = new ResponseExchangeInfo();
-        KursProviderInfo<KursOrganization> exchangeProvider = this.getExchangeProviderInfo();
+        KursProviderInfo exchangeProvider = this.getExchangeProviderInfo();
         Set<KursOrganization> kursOrganizations = exchangeProvider.getOrganizations();
         Set<ResponseExchangeOrganization> exchangeOrganizations = new HashSet<>();
-        kursOrganizations.forEach(organization -> {
-            ResponseExchangeOrganization<ResponseExchangeCurrencyRates> responseExchangeOrganization = new ResponseExchangeOrganization<>();
+        kursOrganizations.forEach((ExchangeOrganization organization) -> {
+            ResponseExchangeOrganization responseExchangeOrganization = new ResponseExchangeOrganization();
             responseExchangeOrganization.setAddress(organization.getAddress());
             responseExchangeOrganization.setLink(organization.getLink());
             responseExchangeOrganization.setPhone(organization.getPhone());
@@ -108,29 +106,29 @@ public class KursExchangeService implements ExchangeService {
         return responseExchangeInfo;
     }
 
-    private BigDecimal getRateValue(Element currencyRow, String rateType) {
+    private String getRateValue(Element currencyRow, String rateType) {
         StringBuilder rateSelector = new StringBuilder(".ipsKursTable_rate[data-rate-type=");
         rateSelector.append(rateType);
         rateSelector.append(']');
         String rate = currencyRow.select(rateSelector.toString()).get(0)
         .getElementsByClass("ipsKurs_rate").text().replace(',', '.');
         if (rate.isEmpty()) {
-            return NumberUtils.createBigDecimal("0");
+            return "0";
         } else {
-            return NumberUtils.createBigDecimal(rate);
+            return rate;
         }
     }
 
-    private BigDecimal getRateChangeValue(Element currencyRow, String rateType) {
+    private String getRateChangeValue(Element currencyRow, String rateType) {
         StringBuilder rateSelector = new StringBuilder(".ipsKursTable_rateChange[data-rate-type=");
         rateSelector.append(rateType);
         rateSelector.append("_change]");
         String rate = currencyRow.select(rateSelector.toString()).get(0)
         .getElementsByClass("ipsKurs_rateChange").text().replace(',', '.');
         if (rate.isEmpty()) {
-            return NumberUtils.createBigDecimal("0");
+            return "0";
         } else {
-            return NumberUtils.createBigDecimal(rate);
+            return rate;
         }
     }
 }
