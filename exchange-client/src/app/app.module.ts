@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { TopHeaderComponent } from './top-header/top-header.component';
-import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
-import { CenterContainerComponent } from './center-container/center-container.component';
-import { BankServicesComponent } from './bank-services/bank-services.component';
-import { BankTableComponent } from './bank-table/bank-table.component';
+import { TopHeaderComponent } from './pages/top-header/top-header.component';
+import { LeftSidebarComponent } from './pages/left-sidebar/left-sidebar.component';
+import { CenterContainerComponent } from './pages/center-container/center-container.component';
+import { BankServicesComponent } from './pages/bank-services/bank-services.component';
+import { BankTableComponent } from './pages/bank-table/bank-table.component';
+import { ExchangeService } from './shared/services/exchange.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,9 +22,13 @@ import { BankTableComponent } from './bank-table/bank-table.component';
     BankTableComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ExchangeService
+  ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}
