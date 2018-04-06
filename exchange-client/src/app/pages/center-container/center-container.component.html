@@ -4,8 +4,10 @@
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 mt-5">
       <h1>{{title}}</h1>
       <app-bank-services></app-bank-services>
-
       <h2>Section title</h2>
+      <label>Exchange currencies<select class="form-control" [ngModel]="dropDowSelect" (ngModelChange)="onChange($event)">
+        <option [selected]="isSelected(i.key)" [value]="i.key" *ngFor="let i of exchangeData?.currencies | entries">{{i.key + '   -   ' + i.value}}</option>
+      </select></label>
       <app-bank-table [exchangeData]="exchangeData"></app-bank-table>
     </main>
   </div>
