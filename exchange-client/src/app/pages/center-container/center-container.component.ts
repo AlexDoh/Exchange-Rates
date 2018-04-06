@@ -16,10 +16,10 @@ export class CenterContainerComponent implements OnInit {
   title: string = 'Finance';
 
   ngOnInit() {
-    this.getExchangeData();
+    this.requestExchangeData();
   }
 
-  getExchangeData(): void {
+  requestExchangeData(): void {
     this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.exchangeData = result);
   };
 

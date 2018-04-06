@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ExchangeInfo } from '../../models/exchange-info';
 
 @Component({
@@ -9,10 +9,17 @@ import { ExchangeInfo } from '../../models/exchange-info';
 export class BankTableComponent implements OnInit {
 
   @Input() exchangeData: ExchangeInfo;
+  exchangeInfo: ExchangeInfo;
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes['exchangeData']) {
+  //     this.exchangeData = this.exchangeData;
+  //   }
+  // }
 
 }
