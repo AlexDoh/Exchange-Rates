@@ -10,6 +10,8 @@ import { BankServicesComponent } from './pages/bank-services/bank-services.compo
 import { BankTableComponent } from './pages/bank-table/bank-table.component';
 import { ExchangeService } from './shared/services/exchange.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from "@angular/forms";
+import { EntriesPipe } from './shared/pipes/entries.pipe';
 
 
 @NgModule({
@@ -19,11 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
     LeftSidebarComponent,
     CenterContainerComponent,
     BankServicesComponent,
-    BankTableComponent
+    BankTableComponent,
+    EntriesPipe
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     ExchangeService
