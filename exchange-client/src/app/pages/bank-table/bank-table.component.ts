@@ -9,12 +9,15 @@ import { ExchangeInfo } from '../../models/exchange-info';
 export class BankTableComponent implements OnInit {
 
   @Input() exchangeData: ExchangeInfo;
+  @Input() currency: string;
   exchangeInfo: ExchangeInfo;
 
   constructor() { }
 
   ngOnInit() {
   }
+
+
 
   // ngOnChanges(changes: SimpleChanges) {
   //   if (changes['exchangeData']) {

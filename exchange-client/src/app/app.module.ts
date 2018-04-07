@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CurrencyPipe } from './shared/pipes/currency.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CenterContainerComponent,
     BankServicesComponent,
     BankTableComponent,
-    EntriesPipe
+    EntriesPipe,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,

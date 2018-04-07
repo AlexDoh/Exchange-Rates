@@ -17,7 +17,7 @@ export class CenterContainerComponent implements OnInit, ControlValueAccessor {
 
   exchangeData: ExchangeInfo;
   title: string = 'Finance';
-  dropDowSelect: string;
+  selectedCurrency: string;
   selectCurrencyForm: FormGroup;
   kolo: any;
 
@@ -30,6 +30,7 @@ export class CenterContainerComponent implements OnInit, ControlValueAccessor {
     this.requestExchangeData();
     this.initForm();
     this.yolo();
+    this.selectedCurrency = 'USD';
   }
 
   requestExchangeData(): void {
@@ -46,9 +47,12 @@ export class CenterContainerComponent implements OnInit, ControlValueAccessor {
     });
 
     this.selectCurrencyForm.valueChanges.subscribe((value) => {
-      console.log(value);
-      this.yolo();
+      this.selectedCurrency = value.currency;
     });
+  }
+
+  getCurrency() {
+    return this.selectedCurrency;
   }
 
   registerOnChange(fn: any): void {
