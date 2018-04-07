@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from '../../shared/services/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-center-container',
