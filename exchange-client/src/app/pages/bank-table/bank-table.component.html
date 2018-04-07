@@ -2,18 +2,18 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>#</th>
-      <th>Header</th>
-      <th>Header</th>
-      <th>Header</th>
-      <th>Header</th>
+      <th>Учреждение</th>
+      <th>Ссылка</th>
+      <th>Дата обновления</th>
+      <th>Покупка</th>
+      <th>Продажа</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let organization of exchangeData?.organizations">
       <td>{{organization.title}}</td>
-      <td>{{organization.address}}</td>
-      <td>{{organization.phone}}</td>
+      <td>{{organization.link}}</td>
+      <td>{{exchangeData?.date}}</td>
       <td>{{organization.branch}}</td>
       <td>{{organization.currencies}}</td>
     </tr>
