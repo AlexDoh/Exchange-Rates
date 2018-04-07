@@ -12,6 +12,7 @@ import { ExchangeService } from './shared/services/exchange.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EntriesPipe } from './shared/pipes/entries.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ExchangeService

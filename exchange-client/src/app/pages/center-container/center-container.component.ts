@@ -1,37 +1,70 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from '../../shared/services/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-center-container',
   templateUrl: './center-container.component.html',
-  styleUrls: [ './center-container.component.scss' ]
+  styleUrls: [ './center-container.component.scss' ],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
+    useExisting: CenterContainerComponent
+  }]
 })
-export class CenterContainerComponent implements OnInit {
-
-  constructor(private exchangeService: ExchangeService) {
-  }
+export class CenterContainerComponent implements OnInit, ControlValueAccessor {
 
   exchangeData: ExchangeInfo;
   title: string = 'Finance';
   dropDowSelect: string;
+  selectCurrencyForm: FormGroup;
+  kolo: any;
+
+  constructor(
+    private exchangeService: ExchangeService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.requestExchangeData();
+    this.initForm();
+    this.yolo();
   }
 
   requestExchangeData(): void {
     this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.exchangeData = result);
   };
 
-  onChange(newValue) {
-    console.log(newValue);
-    this.dropDowSelect = newValue;
-    // ... do other stuff here ...
+  yolo() {
+    console.log(this.selectCurrencyForm.value);
   }
 
-  isSelected(value) {
-    return value === 'USD'
+  initForm() {
+    this.selectCurrencyForm = this.fb.group({
+      currency: 'USD',
+    });
+
+    this.selectCurrencyForm.valueChanges.subscribe((value) => {
+      console.log(value);
+      this.yolo();
+    });
+  }
+
+  registerOnChange(fn: any): void {
+    this.kolo = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.kolo = fn;
+  }
+
+
+  setDisabledState(isDisabled: boolean): void {
+    console.log(isDisabled);
+  }
+  writeValue(obj: any): void {
+    console.log(obj);
   }
 
 }
