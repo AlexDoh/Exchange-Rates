@@ -15,7 +15,7 @@ import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from 
 })
 export class CenterContainerComponent implements OnInit, ControlValueAccessor {
 
-  exchangeData: ExchangeInfo;
+  exchangeData: ExchangeInfo = new ExchangeInfo();
   title: string = 'Finance';
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
