@@ -8,7 +8,7 @@
       <form [formGroup]="selectCurrencyForm" (change)="kolo">
         <label>Exchange currencies
           <select class="form-control" formControlName="currency">
-            <option [ngValue]="i.key" *ngFor="let i of exchangeData?.currencies | entries">
+            <option [ngValue]="i.key" *ngFor="let i of exchangeData.currencies | entries">
               {{i.key + ' - ' + i.value}}
             </option>
           </select></label>

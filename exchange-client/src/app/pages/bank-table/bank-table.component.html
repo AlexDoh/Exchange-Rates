@@ -10,10 +10,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let organization of exchangeData?.organizations | currency: currency">
+    <tr *ngFor="let organization of exchangeData.organizations | currency: currency">
       <td>{{organization.title}}</td>
       <td>{{organization.link}}</td>
-      <td>{{exchangeData?.date}}</td>
+      <td>{{exchangeData.date}}</td>
       <td>{{currency}}</td>
       <td>{{organization.currencies}}</td>
     </tr>
