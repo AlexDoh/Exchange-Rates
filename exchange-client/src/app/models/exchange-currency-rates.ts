@@ -1,7 +1,7 @@
 export class ExchangeCurrencyRates {
 
-  private _bid: string;
-  private _ask: string;
+  private _bid: string = '';
+  private _ask: string = '';
 
   private _updated?: string;
   private _bidChange?: string;

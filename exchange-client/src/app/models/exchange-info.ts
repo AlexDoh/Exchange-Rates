@@ -2,9 +2,9 @@ import { ExchangeOrganization } from './exchange-organization';
 
 export class ExchangeInfo {
 
-  private _organizations: ExchangeOrganization[];
-  private _orgTypes: Map<number, string>;
-  private _currencies: Map<string, string>;
+  private _organizations: ExchangeOrganization[] = [];
+  private _orgTypes: Map<number, string> = new Map<number, string>();
+  private _currencies: Map<string, string> = new Map<string, string>();
 
   private _date?: string;
 

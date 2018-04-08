@@ -2,11 +2,11 @@ import { ExchangeCurrencyRates } from './exchange-currency-rates';
 
 export class ExchangeOrganization {
 
-  private _title: string;
-  private _link: string;
-  private _address: string;
-  private _phone: string;
-  private _currencies: Map<string, ExchangeCurrencyRates[]>;
+  private _title: string = '';
+  private _link: string = '';
+  private _address: string = '';
+  private _phone: string = '';
+  private _currencies: Map<string, ExchangeCurrencyRates[]> = new Map<string, ExchangeCurrencyRates[]>();
 
   private _id?: string;
   private _oldId?: number;
