@@ -10,10 +10,8 @@ export class BankTableComponent implements OnInit {
 
   @Input() exchangeData: ExchangeInfo;
   @Input() currencyType: string;
-  exchangeInfo: ExchangeInfo;
   isDesc: boolean = false;
   column: string = 'title';
-  direction: number = 1;
 
   constructor() { }
 
@@ -21,17 +19,8 @@ export class BankTableComponent implements OnInit {
   }
 
   sort(property){
-    this.isDesc = !this.isDesc; //change the direction
+    this.isDesc = !this.isDesc;
     this.column = property;
-    this.direction = this.isDesc ? 1 : -1;
   };
-
-
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['exchangeData']) {
-  //     this.exchangeData = this.exchangeData;
-  //   }
-  // }
 
 }
