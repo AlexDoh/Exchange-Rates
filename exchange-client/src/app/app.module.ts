@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 import { AppComponent } from './app.component';
@@ -14,7 +15,6 @@ import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './shared/pipes/currency.pipe';
-import { OrderByPipe } from './shared/pipes/order-by.pipe';
 
 
 @NgModule({
@@ -26,14 +26,14 @@ import { OrderByPipe } from './shared/pipes/order-by.pipe';
     BankServicesComponent,
     BankTableComponent,
     EntriesPipe,
-    CurrencyPipe,
-    OrderByPipe
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OrderModule
   ],
   providers: [
     ExchangeService

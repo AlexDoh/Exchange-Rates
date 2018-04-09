@@ -23,24 +23,24 @@
         'fa-sort-desc': (column == 'date' && isDesc) }"
            aria-hidden="true"> </i>
       </th>
-      <th class="pointer" (click)="sort('currencies[' + currencyType + '].bid')">
+      <th class="pointer" (click)="sort('currencies.' + currencyType + '.bid')">
         Покупка
-        <i class="fa" [ngClass]="{'fa-sort': column != 'currencies[' + currencyType + '].bid',
-        'fa-sort-asc': (column == 'currencies[' + currencyType + '].bid' && !isDesc),
-        'fa-sort-desc': (column == 'currencies[' + currencyType + '].bid' && isDesc) }"
+        <i class="fa" [ngClass]="{'fa-sort': column != 'currencies.' + currencyType + '.bid',
+        'fa-sort-asc': (column == 'currencies.' + currencyType + '.bid' && !isDesc),
+        'fa-sort-desc': (column == 'currencies.' + currencyType + '.bid' && isDesc) }"
            aria-hidden="true"> </i>
       </th>
-      <th class="pointer" (click)="sort('ask')">
+      <th class="pointer" (click)="sort('currencies.' + currencyType + '.ask')">
         Продажа
-        <i class="fa" [ngClass]="{'fa-sort': column != 'ask',
-        'fa-sort-asc': (column == 'ask' && !isDesc),
-        'fa-sort-desc': (column == 'ask' && isDesc) }"
+        <i class="fa" [ngClass]="{'fa-sort': column != 'currencies.' + currencyType + '.ask',
+        'fa-sort-asc': (column == 'currencies.' + currencyType + '.ask' && !isDesc),
+        'fa-sort-desc': (column == 'currencies.' + currencyType + '.ask' && isDesc) }"
            aria-hidden="true"> </i>
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: {property: column, direction: direction}">
+    <tr *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: column : isDesc">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
       <td>{{exchangeData.orgTypes[organization.orgType]}}</td>
       <td>{{exchangeData.date | date: 'MMM d, y, HH:mm:ss'}}</td>
