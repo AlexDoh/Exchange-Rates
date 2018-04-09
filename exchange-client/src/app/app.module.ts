@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './shared/pipes/currency.pipe';
+import { OrderByPipe } from './shared/pipes/order-by.pipe';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CurrencyPipe } from './shared/pipes/currency.pipe';
     BankServicesComponent,
     BankTableComponent,
     EntriesPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

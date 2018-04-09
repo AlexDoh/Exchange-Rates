@@ -2,15 +2,45 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>Учреждение</th>
-      <th>Тип учреждения</th>
-      <th>Дата обновления</th>
-      <th>Покупка</th>
-      <th>Продажа</th>
+      <th class="pointer" (click)="sort('title')">
+        Учреждение
+        <i class="fa" [ngClass]="{'fa-sort': column != 'title',
+        'fa-sort-asc': (column == 'title' && !isDesc),
+        'fa-sort-desc': (column == 'title' && isDesc) }"
+           aria-hidden="true"> </i>
+      </th>
+      <th class="pointer" (click)="sort('orgType')">
+        Тип учреждения
+        <i class="fa" [ngClass]="{'fa-sort': column != 'orgType',
+        'fa-sort-asc': (column == 'orgType' && !isDesc),
+        'fa-sort-desc': (column == 'orgType' && isDesc) }"
+           aria-hidden="true"> </i>
+      </th>
+      <th class="pointer" (click)="sort('date')">
+        Дата обновления
+        <i class="fa" [ngClass]="{'fa-sort': column != 'date',
+        'fa-sort-asc': (column == 'date' && !isDesc),
+        'fa-sort-desc': (column == 'date' && isDesc) }"
+           aria-hidden="true"> </i>
+      </th>
+      <th class="pointer" (click)="sort('currencies[' + currencyType + '].bid')">
+        Покупка
+        <i class="fa" [ngClass]="{'fa-sort': column != 'currencies[' + currencyType + '].bid',
+        'fa-sort-asc': (column == 'currencies[' + currencyType + '].bid' && !isDesc),
+        'fa-sort-desc': (column == 'currencies[' + currencyType + '].bid' && isDesc) }"
+           aria-hidden="true"> </i>
+      </th>
+      <th class="pointer" (click)="sort('ask')">
+        Продажа
+        <i class="fa" [ngClass]="{'fa-sort': column != 'ask',
+        'fa-sort-asc': (column == 'ask' && !isDesc),
+        'fa-sort-desc': (column == 'ask' && isDesc) }"
+           aria-hidden="true"> </i>
+      </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let organization of exchangeData.organizations | currency: currencyType">
+    <tr *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: {property: column, direction: direction}">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
       <td>{{exchangeData.orgTypes[organization.orgType]}}</td>
       <td>{{exchangeData.date | date: 'MMM d, y, HH:mm:ss'}}</td>
