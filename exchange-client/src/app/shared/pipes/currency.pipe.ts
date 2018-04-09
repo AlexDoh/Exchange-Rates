@@ -6,13 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CurrencyPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    const organizations = [];
-    value.forEach((organization, index) => {
-      if (organization.currencies[args]) {
-        organizations.push(organization);
-      }
-    });
-    return organizations;
+    return value.filter(organization => organization.currencies[ args ]);
   }
-
 }
