@@ -18,9 +18,9 @@ export class BankTableComponent implements OnInit {
   ngOnInit() {
   }
 
-  sort(property){
+  sort(columnName){
     this.isDesc = !this.isDesc;
-    this.column = property;
+    this.column = columnName;
   };
 
 }
