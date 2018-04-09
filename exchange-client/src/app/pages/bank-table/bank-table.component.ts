@@ -9,7 +9,7 @@ import { ExchangeInfo } from '../../models/exchange-info';
 export class BankTableComponent implements OnInit {
 
   @Input() exchangeData: ExchangeInfo;
-  @Input() currency: string;
+  @Input() currencyType: string;
   exchangeInfo: ExchangeInfo;
 
   constructor() { }
