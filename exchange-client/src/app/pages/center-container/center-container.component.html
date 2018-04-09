@@ -8,11 +8,11 @@
       <form [formGroup]="selectCurrencyForm">
         <label>Exchange currencies
           <select class="form-control" formControlName="currency">
-            <option [value]="'USD'">{{'USD - ' + exchangeData.currencies['USD']}}</option>
-            <option [value]="'EUR'">{{'EUR - ' + exchangeData.currencies['EUR']}}</option>
-            <option [value]="'RUB'">{{'RUB - ' + exchangeData.currencies['RUB']}}</option>
-            <hr>
-            <option [value]="i.key" *ngFor="let i of exchangeData.currencies | entries">
+            <option [value]="i.key" *ngFor="let i of priorityCurrenciesMap | entries">
+              {{i.key + ' - ' + i.value}}
+            </option>
+            <!--<hr>-->
+            <option [value]="i.key" *ngFor="let i of regularCurrenciesMap | entries">
               {{i.key + ' - ' + i.value}}
             </option>
           </select></label>

@@ -8,6 +8,14 @@ export class ExchangeInfo {
 
   private _date?: string;
 
+  // constructor(exchangeInfo) {
+  //   const { organizations, orgTypes, currencies, date } = exchangeInfo;
+  //   this.organizations = organizations;
+  //   this.currencies = currencies;
+  //   this.orgTypes = orgTypes;
+  //   this.date = date;
+  // }
+
   get organizations(): ExchangeOrganization[] {
     return this._organizations;
   }
