@@ -9,7 +9,7 @@ export class ExchangeService {
 
   constructor(private http: HttpClient) { }
 
-  getFinanceExchangeInfo = (): Observable<ExchangeInfo> => {
+  getFinanceExchangeInfo(): Observable<ExchangeInfo> {
     return this.http.get<ExchangeInfo>(environment.api.exchange.get.finance);
   }
 

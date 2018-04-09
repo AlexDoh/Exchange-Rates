@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th>Учреждение</th>
-      <th>Ссылка</th>
+      <th>Тип учреждения</th>
       <th>Дата обновления</th>
       <th>Покупка</th>
       <th>Продажа</th>
@@ -11,9 +11,9 @@
     </thead>
     <tbody>
     <tr *ngFor="let organization of exchangeData.organizations | currency: currencyType">
-      <td>{{organization.title}}</td>
-      <td>{{organization.link}}</td>
-      <td>{{exchangeData.date}}</td>
+      <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
+      <td>{{exchangeData.orgTypes[organization.orgType]}}</td>
+      <td>{{exchangeData.date | date: 'MMM d, y, HH:mm:ss'}}</td>
       <td>{{organization.currencies[currencyType].bid}}</td>
       <td>{{organization.currencies[currencyType].ask}}</td>
     </tr>
