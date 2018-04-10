@@ -15,6 +15,8 @@ import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './shared/pipes/currency.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 
 @NgModule({
@@ -26,14 +28,16 @@ import { CurrencyPipe } from './shared/pipes/currency.pipe';
     BankServicesComponent,
     BankTableComponent,
     EntriesPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    OrderModule
+    OrderModule,
+    AppRoutingModule
   ],
   providers: [
     ExchangeService
