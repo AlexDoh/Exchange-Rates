@@ -11,13 +11,13 @@ import { ExchangeOrganization } from '../../models/exchange-organization';
 })
 export class CenterContainerComponent implements OnInit {
 
-  exchangeData: ExchangeInfo = new ExchangeInfo();
+  exchangeData: ExchangeInfo;
   title: string = 'Finance';
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = ['USD', 'EUR', 'RUB'];
-  priorityCurrenciesMap: {} = {};
-  regularCurrenciesMap: {} = {};
+  priorityCurrenciesMap: Map<string, string>;
+  regularCurrenciesMap: Map<string, string>;
 
   constructor(
     private exchangeService: ExchangeService,

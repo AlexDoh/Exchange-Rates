@@ -2,19 +2,19 @@ import { ExchangeOrganization } from './exchange-organization';
 
 export class ExchangeInfo {
 
-  private _organizations: ExchangeOrganization[] = [];
-  private _orgTypes: Map<number, string> = new Map<number, string>();
+  private _organizations: ExchangeOrganization[];
+  private _orgTypes: Map<string, string>;
   private _currencies: Map<string, string> = new Map<string, string>();
 
   private _date?: string;
 
-  // constructor(exchangeInfo) {
-  //   const { organizations, orgTypes, currencies, date } = exchangeInfo;
-  //   this.organizations = organizations;
-  //   this.currencies = currencies;
-  //   this.orgTypes = orgTypes;
-  //   this.date = date;
-  // }
+  constructor(exchangeInfo: ExchangeInfo) {
+    const { organizations, orgTypes, currencies, date } = exchangeInfo;
+    this.organizations = organizations as ExchangeOrganization[];
+    this.currencies = new Map<string, string>(Object.entries(currencies));
+    this.orgTypes = new Map<string, string>(Object.entries(orgTypes));
+    this.date = date.toString();
+  }
 
   get organizations(): ExchangeOrganization[] {
     return this._organizations;
@@ -24,11 +24,11 @@ export class ExchangeInfo {
     this._organizations = value;
   }
 
-  get orgTypes(): Map<number, string> {
+  get orgTypes(): Map<string, string> {
     return this._orgTypes;
   }
 
-  set orgTypes(value: Map<number, string>) {
+  set orgTypes(value: Map<string, string>) {
     this._orgTypes = value;
   }
 

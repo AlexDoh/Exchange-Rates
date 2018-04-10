@@ -1,11 +1,24 @@
+import { ExchangeOrganization } from "./exchange-organization";
+import { ExchangeInfo } from "./exchange-info";
+
 export class ExchangeCurrencyRates {
 
-  private _bid: string = '';
-  private _ask: string = '';
+  private _bid: string;
+  private _ask: string;
 
   private _updated?: string;
   private _bidChange?: string;
   private _askChange?: string;
+
+  constructor(exchangeCurrencyRate: ExchangeCurrencyRates) {
+    const { bid, ask, updated, bidChange, askChange } = exchangeCurrencyRate;
+    this.bid = bid.toString();
+    this.ask = ask.toString();
+
+    this.updated = updated.toString();
+    this.bidChange = bidChange.toString();
+    this.askChange = askChange.toString();
+  }
 
   get bid(): string {
     return this._bid;

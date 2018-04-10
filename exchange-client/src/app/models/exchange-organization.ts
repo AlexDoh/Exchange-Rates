@@ -1,12 +1,13 @@
 import { ExchangeCurrencyRates } from './exchange-currency-rates';
+import { ExchangeInfo } from "./exchange-info";
 
 export class ExchangeOrganization {
 
-  private _title: string = '';
-  private _link: string = '';
-  private _address: string = '';
-  private _phone: string = '';
-  private _currencies: Map<string, ExchangeCurrencyRates[]> = new Map<string, ExchangeCurrencyRates[]>();
+  private _title: string;
+  private _link: string;
+  private _address: string;
+  private _phone: string;
+  private _currencies: Map<string, ExchangeCurrencyRates[]>;
 
   private _id?: string;
   private _oldId?: number;
@@ -14,6 +15,22 @@ export class ExchangeOrganization {
   private _branch?: boolean;
   private _regionId?: string;
   private _cityId?: string;
+
+  constructor(exchangeOrganization: ExchangeOrganization) {
+    const { title, link, address, phone, currencies, id, oldId, orgType, branch, regionId, cityId } = exchangeOrganization;
+    this.title = title.toString();
+    this.link = link.toString();
+    this.address = address.toString();
+    this.phone = phone.toString();
+    this.currencies = new Map<string, ExchangeCurrencyRates[]>(Object.entries(currencies));
+
+    this.id = id.toString();
+    this.oldId = oldId;
+    this.orgType = orgType;
+    this.branch = branch;
+    this.cityId = cityId.toString();
+    this.cityId = cityId.toString();
+  }
 
   get title(): string {
     return this._title;
