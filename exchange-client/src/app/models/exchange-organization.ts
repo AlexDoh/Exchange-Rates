@@ -1,5 +1,4 @@
 import { ExchangeCurrencyRates } from './exchange-currency-rates';
-import { ExchangeInfo } from "./exchange-info";
 
 export class ExchangeOrganization {
 
