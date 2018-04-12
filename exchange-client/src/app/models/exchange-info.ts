@@ -8,7 +8,7 @@ export class ExchangeInfo {
 
   private _date?: string;
 
-  constructor({ organizations, orgTypes, currencies, date }) {
+  constructor({ organizations, orgTypes, currencies, date }: ExchangeInfo) {
     this.organizations = organizations as ExchangeOrganization[];
     this.currencies = new Map<string, string>(Object.entries(currencies));
     this.orgTypes = new Map<number, string>(

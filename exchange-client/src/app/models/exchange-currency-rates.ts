@@ -1,6 +1,3 @@
-import { ExchangeOrganization } from "./exchange-organization";
-import { ExchangeInfo } from "./exchange-info";
-
 export class ExchangeCurrencyRates {
 
   private _bid: string;
@@ -10,7 +7,7 @@ export class ExchangeCurrencyRates {
   private _bidChange?: string;
   private _askChange?: string;
 
-  constructor({ bid, ask, updated, bidChange, askChange }) {
+  constructor({ bid, ask, updated, bidChange, askChange }: ExchangeCurrencyRates) {
     this.bid = bid.toString();
     this.ask = ask.toString();
 
