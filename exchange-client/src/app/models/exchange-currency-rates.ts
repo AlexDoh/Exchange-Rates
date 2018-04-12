@@ -10,8 +10,7 @@ export class ExchangeCurrencyRates {
   private _bidChange?: string;
   private _askChange?: string;
 
-  constructor(exchangeCurrencyRate: ExchangeCurrencyRates) {
-    const { bid, ask, updated, bidChange, askChange } = exchangeCurrencyRate;
+  constructor({ bid, ask, updated, bidChange, askChange }) {
     this.bid = bid.toString();
     this.ask = ask.toString();
 

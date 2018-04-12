@@ -16,8 +16,7 @@ export class ExchangeOrganization {
   private _regionId?: string;
   private _cityId?: string;
 
-  constructor(exchangeOrganization: ExchangeOrganization) {
-    const { title, link, address, phone, currencies, id, oldId, orgType, branch, regionId, cityId } = exchangeOrganization;
+  constructor({ title, link, address, phone, currencies, id, oldId, orgType, branch, regionId, cityId }) {
     this.title = title.toString();
     this.link = link.toString();
     this.address = address.toString();
@@ -28,7 +27,7 @@ export class ExchangeOrganization {
     this.oldId = oldId;
     this.orgType = orgType;
     this.branch = branch;
-    this.cityId = cityId.toString();
+    this.regionId = regionId.toString();
     this.cityId = cityId.toString();
   }
 
