@@ -16,8 +16,8 @@ export class CenterContainerComponent implements OnInit {
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = ['USD', 'EUR', 'RUB'];
-  priorityCurrenciesMap: Map<string, string>;
-  regularCurrenciesMap: Map<string, string>;
+  priorityCurrenciesMap: Map<string, string> = new Map<string, string>();
+  regularCurrenciesMap: Map<string, string> = new Map<string, string>();
 
   constructor(
     private exchangeService: ExchangeService,
@@ -33,11 +33,15 @@ export class CenterContainerComponent implements OnInit {
 
   processExchangeData(exchangeData) {
     this.exchangeData = exchangeData;
-    Object.entries(this.exchangeData.currencies).forEach(([currencyType, currencyText]) => {
+    this.exchangeData.currencies.forEach((currencyText, currencyType) => {
       this.priorityCurrencies.includes(currencyType) ?
-        this.priorityCurrenciesMap[currencyType] =  currencyText :
-        this.regularCurrenciesMap[currencyType] = currencyText;
+        this.priorityCurrenciesMap.set(currencyType, currencyText) :
+        this.regularCurrenciesMap.set(currencyType, currencyText);
     });
+  };
+
+  getCurrenciesAsArray(entries) {
+    return Array.from(entries);
   }
 
   requestExchangeData(): void {
