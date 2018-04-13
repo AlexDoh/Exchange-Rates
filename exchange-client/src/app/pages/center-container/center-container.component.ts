@@ -59,7 +59,7 @@ export class CenterContainerComponent implements OnInit {
       currency: 'USD',
     });
 
-    this.selectCurrencyForm.valueChanges.subscribe((value) => {
+    this.selectCurrencyForm.valueChanges.subscribe(value => {
       this.selectedCurrency = value.currency;
     });
   }
