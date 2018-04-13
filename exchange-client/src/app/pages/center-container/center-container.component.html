@@ -4,9 +4,9 @@
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 mt-5">
       <h1>{{title}}</h1>
       <app-bank-services></app-bank-services>
-      <h2>Section title</h2>
+      <h2 class="text-center">Section title</h2>
       <form [formGroup]="selectCurrencyForm">
-        <label>Exchange currencies
+        <label>Выберите валюту
           <select class="form-control" formControlName="currency">
             <option [value]="i[0]" *ngFor="let i of getCurrenciesAsArray(priorityCurrenciesMap.entries())">
               {{i[0] + ' - ' + i[1]}}
