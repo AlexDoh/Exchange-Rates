@@ -12,13 +12,7 @@ export class ExchangeService {
   }
 
   getFinanceExchangeInfo(): Observable<ExchangeInfo> {
-    return this.http.get<ExchangeInfo>(environment.api.exchange.get.finance).map(result => {
-      let exchangeInfo = new ExchangeInfo(result);
-      // exchangeInfo.organizations = result.organizations;
-      // exchangeInfo.currencies = result.currencies;
-      // exchangeInfo.orgTypes = result.orgTypes;
-      return exchangeInfo;
-    });
+    return this.http.get<ExchangeInfo>(environment.api.exchange.get.finance).map(result => new ExchangeInfo(result));
   }
 
 }
