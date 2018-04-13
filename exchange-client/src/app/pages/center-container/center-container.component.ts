@@ -3,6 +3,7 @@ import { ExchangeService } from '../../shared/services/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ExchangeOrganization } from '../../models/exchange-organization';
+import { UtilsService } from "../../shared/services/utils.service";
 
 @Component({
   selector: 'app-center-container',
@@ -21,6 +22,7 @@ export class CenterContainerComponent implements OnInit {
 
   constructor(
     private exchangeService: ExchangeService,
+    private utilsService: UtilsService<string, string>,
     private fb: FormBuilder
   ) {
   }
@@ -40,8 +42,12 @@ export class CenterContainerComponent implements OnInit {
     });
   };
 
-  getCurrenciesAsArray(entries) {
-    return Array.from(entries);
+  get priorityCurrenciesArray(): Array<[string, string]> {
+    return this.utilsService.getArrayFromMapEntries(this.priorityCurrenciesMap.entries());
+  }
+
+  get regularCurrenciesArray(): Array<[string, string]> {
+    return this.utilsService.getArrayFromMapEntries(this.regularCurrenciesMap.entries());
   }
 
   requestExchangeData(): void {

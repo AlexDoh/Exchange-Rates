@@ -8,11 +8,11 @@
       <form [formGroup]="selectCurrencyForm">
         <label>Выберите валюту
           <select class="form-control" formControlName="currency">
-            <option [value]="i[0]" *ngFor="let i of getCurrenciesAsArray(priorityCurrenciesMap.entries())">
+            <option [value]="i[0]" *ngFor="let i of priorityCurrenciesArray">
               {{i[0] + ' - ' + i[1]}}
             </option>
             <hr>
-            <option [value]="i[0]" *ngFor="let i of getCurrenciesAsArray(regularCurrenciesMap.entries())">
+            <option [value]="i[0]" *ngFor="let i of regularCurrenciesArray">
               {{i[0] + ' - ' + i[1]}}
             </option>
           </select></label>

@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './shared/pipes/currency.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { UtilsService } from "./shared/services/utils.service";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
     AppRoutingModule
   ],
   providers: [
-    ExchangeService
+    ExchangeService,
+    UtilsService
   ],
   bootstrap: [ AppComponent ]
 })
