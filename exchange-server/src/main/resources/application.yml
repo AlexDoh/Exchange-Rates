@@ -1,5 +1,14 @@
 spring:
-  autoconfigure:
-    exclude:
-    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-    - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/exchange
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
