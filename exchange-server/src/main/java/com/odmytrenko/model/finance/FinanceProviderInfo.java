@@ -1,22 +1,38 @@
 package com.odmytrenko.model.finance;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.MapKeyClass;
+import javax.persistence.MapKeyColumn;
 import java.util.Map;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity(name = "FINANCE_PROVIDER")
+@DiscriminatorValue("FINANCE")
 public class FinanceProviderInfo extends ExchangeProvider<FinanceOrganization> {
 
-    @JsonProperty
+    @Column(name="SOURCE_ID")
     private String sourceId;
-    @JsonProperty
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "REGIONS")
+    @MapKeyClass(String.class)
+    @MapKeyColumn(name="REGION")
+    @Column(name="DESCRIPTION")
     private Map<String, String> regions;
-    @JsonProperty
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "CITIES")
+    @MapKeyClass(String.class)
+    @MapKeyColumn(name="CITY")
+    @Column(name="DESCRIPTION")
     private Map<String, String> cities;
 }

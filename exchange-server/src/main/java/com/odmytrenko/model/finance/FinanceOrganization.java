@@ -1,26 +1,29 @@
 package com.odmytrenko.model.finance;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.odmytrenko.model.ExchangeOrganization;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity(name = "FINANCE_ORGANIZATION")
+@DiscriminatorValue("FINANCE")
 public class FinanceOrganization extends ExchangeOrganization<FinanceCurrencyRates> {
 
-    @JsonProperty
-    private String id;
-    @JsonProperty
+    @Column(name="OLD_ID")
     private Integer oldId;
-    @JsonProperty
+    @Column(name="ORG_TYPE")
     private Integer orgType;
-    @JsonProperty
+    @Column(name="BRANCH")
     private Boolean branch;
-    @JsonProperty
+    @Column(name="REGION_ID")
     private String regionId;
-    @JsonProperty
+    @Column(name="CITY_ID")
     private String cityId;
 }
