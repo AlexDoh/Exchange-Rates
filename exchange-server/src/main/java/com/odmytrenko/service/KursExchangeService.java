@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Service
 @Qualifier("kurs")
@@ -24,7 +25,7 @@ public class KursExchangeService implements ExchangeService {
     @Override
     public ExchangeProvider getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
-        Set<KursOrganization> kursOrganizationSet = new HashSet<>();
+        List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
         for (int i = 1; i < 400; i++) {

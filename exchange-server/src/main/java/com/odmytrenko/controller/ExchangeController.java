@@ -1,5 +1,6 @@
 package com.odmytrenko.controller;
 
+import com.odmytrenko.dao.ExchangeProviderRepository;
 import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,22 @@ public class ExchangeController {
     @Qualifier("finance")
     private ExchangeService financeExchangeService;
 
+    @Autowired
+    private ExchangeProviderRepository exchangeProviderRepository;
+
     @RequestMapping(path = "/kurs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ExchangeProvider getKursExchangeInfo(){
-        return kursExchangeService.getExchangeInfo();
+    public ExchangeProvider getKursExchangeInfo() {
+        ExchangeProvider exchangeProvider = kursExchangeService.getExchangeInfo();
+        exchangeProviderRepository.save(exchangeProvider);
+        return exchangeProviderRepository.findAll().get(1);
     }
 
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ExchangeProvider getFinanceExchangeInfo(){
-        return financeExchangeService.getExchangeInfo();
+    public ExchangeProvider getFinanceExchangeInfo() {
+        ExchangeProvider exchangeProvider = financeExchangeService.getExchangeInfo();
+        exchangeProviderRepository.save(exchangeProvider);
+        return exchangeProviderRepository.findAll().get(0);
     }
 }
