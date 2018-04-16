@@ -5,9 +5,12 @@ import com.odmytrenko.model.ExchangeOrganization;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-@Entity(name = "KURS_ORGANIZATION")
-@DiscriminatorValue("KURS")
+@Entity
+@Table(name = "ORGANIZATIONS_KURS")
+@PrimaryKeyJoinColumn(name = "ORGANIZATION_ID",referencedColumnName = "ID")
 public class KursOrganization extends ExchangeOrganization<KursCurrencyRates> {
 }

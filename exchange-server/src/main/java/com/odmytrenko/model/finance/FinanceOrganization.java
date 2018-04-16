@@ -8,12 +8,15 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(name = "FINANCE_ORGANIZATION")
-@DiscriminatorValue("FINANCE")
+@Entity
+@Table(name = "ORGANIZATIONS_FINANCE")
+@PrimaryKeyJoinColumn(name = "ORGANIZATION_ID",referencedColumnName = "ID")
 public class FinanceOrganization extends ExchangeOrganization<FinanceCurrencyRates> {
 
     @Column(name="OLD_ID")

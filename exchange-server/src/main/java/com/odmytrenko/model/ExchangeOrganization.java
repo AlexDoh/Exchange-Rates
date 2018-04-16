@@ -29,8 +29,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "ORGANIZATIONS")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "PROVIDER_NAME")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ExchangeOrganization<T> {
 
     @JsonIgnore

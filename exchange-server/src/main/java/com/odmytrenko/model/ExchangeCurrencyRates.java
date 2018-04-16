@@ -23,8 +23,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "CURRENCY_RATES")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "PROVIDER_NAME")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ExchangeCurrencyRates {
 
     @Id

@@ -12,13 +12,16 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.MapKeyClass;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.util.Map;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(name = "FINANCE_PROVIDER")
-@DiscriminatorValue("FINANCE")
+@Entity
+@Table(name = "PROVIDERS_FINANCE")
+@PrimaryKeyJoinColumn(name = "PROVIDER_ID",referencedColumnName = "ID")
 public class FinanceProviderInfo extends ExchangeProvider<FinanceOrganization> {
 
     @Column(name="SOURCE_ID")
