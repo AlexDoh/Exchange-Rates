@@ -7,7 +7,7 @@ public class H2DialectCustom extends H2Dialect {
 
     public H2DialectCustom() {
         super();
-        registerColumnType(Types.BINARY, "varbinary");
+        registerColumnType(Types.BINARY, "varbinary");//
     }
 
 }
