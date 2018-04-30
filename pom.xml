@@ -28,7 +28,7 @@
         <lombok.version>1.16.20</lombok.version>
         <jsoup.version>1.11.2</jsoup.version>
         <apache.commons.version>3.7</apache.commons.version>
-        <hibernate.version>5.2.16.Final</hibernate.version>
+        <hibernate.version>5.2.17.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
