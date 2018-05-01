@@ -24,6 +24,8 @@ public class KursExchangeService implements ExchangeService {
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
+        kursProviderInfo.setTitle("Kurs.com.ua");
+        kursProviderInfo.setLink("https://kurs.com.ua/");
         List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 

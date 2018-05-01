@@ -17,7 +17,10 @@ public class FinanceExchangeService implements ExchangeService {
             String json = Jsoup.connect("http://resources.finance.ua/ru/public/currency-cash.json")
                 .ignoreContentType(true).execute().body();
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(json, FinanceProviderInfo.class);
+            FinanceProviderInfo financeProviderInfo = mapper.readValue(json, FinanceProviderInfo.class);
+            financeProviderInfo.setTitle("Finance.ua");
+            financeProviderInfo.setLink("https://finance.ua/");
+            return financeProviderInfo;
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("There was an error during parse json object: " + e.getMessage(), e.getCause());
