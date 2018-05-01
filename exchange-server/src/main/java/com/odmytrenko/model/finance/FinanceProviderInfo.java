@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
@@ -27,10 +29,15 @@ import java.util.Map;
 @Entity
 @Table(name = "PROVIDERS_FINANCE")
 public class FinanceProviderInfo extends ExchangeProvider {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "PROVIDER_ID")
-    private Long id;
+    private UUID id;
     @Column(name = "DATE")
     private String date;
     @Column(name = "SOURCE_ID")
