@@ -2,35 +2,26 @@ package com.odmytrenko.model.kurs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.odmytrenko.model.ExchangeCurrencyRates;
+import com.odmytrenko.model.ExchangeOrganization;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Entity
 @Table(name = "CURRENCY_RATES_KURS")
 @Data
-public class KursCurrencyRates {
+@PrimaryKeyJoinColumn(name = "KURS_CURRENCY_RATES_ID", referencedColumnName = "ID")
+public class KursCurrencyRates extends ExchangeCurrencyRates {
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    private UUID id;
-    @Column(name = "BID")
-    private String bid;
-    @Column(name = "ASK")
-    private String ask;
     @Column(name = "UPDATED")
     private String updated;
     @Column(name = "BID_CHANGE")
@@ -40,5 +31,5 @@ public class KursCurrencyRates {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "ORGANIZATION_ID")
-    private KursOrganization organization;
+    private ExchangeOrganization organization;
 }
