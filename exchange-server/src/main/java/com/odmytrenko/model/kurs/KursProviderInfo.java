@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "PROVIDERS_KURS")
 @Data
-@PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID",referencedColumnName = "PROVIDER_ID")
+@PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID", referencedColumnName = "PROVIDER_ID")
 public class KursProviderInfo extends ExchangeProvider {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -25,7 +25,7 @@ import java.util.Map;
 @Data
 @Entity
 @Table(name = "PROVIDERS_FINANCE")
-@PrimaryKeyJoinColumn(name = "FINANCE_PROVIDER_ID",referencedColumnName = "PROVIDER_ID")
+@PrimaryKeyJoinColumn(name = "FINANCE_PROVIDER_ID", referencedColumnName = "PROVIDER_ID")
 public class FinanceProviderInfo extends ExchangeProvider {
 
     @Column(name = "DATE")
