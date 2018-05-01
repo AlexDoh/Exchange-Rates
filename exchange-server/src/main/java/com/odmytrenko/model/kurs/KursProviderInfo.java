@@ -16,12 +16,12 @@ import javax.persistence.Transient;
 import java.util.List;
 import java.util.Map;
 
-@EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "PROVIDERS_KURS")
-@Data
-@PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID", referencedColumnName = "PROVIDER_ID")
+@PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID", referencedColumnName = "ID")
 public class KursProviderInfo extends ExchangeProvider {
 
     @Transient

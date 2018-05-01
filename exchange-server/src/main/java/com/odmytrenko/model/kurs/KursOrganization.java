@@ -20,11 +20,11 @@ import javax.persistence.Table;
 import java.util.Map;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ORGANIZATIONS_KURS")
-@PrimaryKeyJoinColumn(name = "KURS_ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
+@PrimaryKeyJoinColumn(name = "KURS_ORGANIZATION_ID", referencedColumnName = "ID")
 public class KursOrganization extends ExchangeOrganization {
 
     @MapKeyColumn(name = "TYPE")

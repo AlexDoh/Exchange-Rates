@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CURRENCY_RATES_FINANCE")
-@Data
 @PrimaryKeyJoinColumn(name = "FINANCE_CURRENCY_RATES_ID", referencedColumnName = "ID")
 public class FinanceCurrencyRates extends ExchangeCurrencyRates {
 

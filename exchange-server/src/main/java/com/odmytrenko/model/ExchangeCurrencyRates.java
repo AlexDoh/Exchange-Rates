@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,8 +26,6 @@ public abstract class ExchangeCurrencyRates {
         strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID id;
-    @Column(name = "BID")
     private String bid;
-    @Column(name = "ASK")
     private String ask;
 }

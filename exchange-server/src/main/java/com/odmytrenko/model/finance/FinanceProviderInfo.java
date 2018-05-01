@@ -20,17 +20,15 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Map;
 
-@EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "PROVIDERS_FINANCE")
-@PrimaryKeyJoinColumn(name = "FINANCE_PROVIDER_ID", referencedColumnName = "PROVIDER_ID")
+@PrimaryKeyJoinColumn(name = "FINANCE_PROVIDER_ID", referencedColumnName = "ID")
 public class FinanceProviderInfo extends ExchangeProvider {
 
-    @Column(name = "DATE")
     private String date;
-    @Column(name = "SOURCE_ID")
     private String sourceId;
     @ElementCollection(targetClass = String.class)
     @CollectionTable(name = "REGIONS", joinColumns = @JoinColumn(name = "PROVIDER_ID"))
