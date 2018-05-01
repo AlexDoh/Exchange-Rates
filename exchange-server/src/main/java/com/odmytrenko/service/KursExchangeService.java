@@ -1,6 +1,5 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursOrganization;
 import com.odmytrenko.model.kurs.KursProviderInfo;
@@ -23,12 +22,7 @@ import java.util.UUID;
 public class KursExchangeService implements ExchangeService {
 
     @Override
-    public FinanceProviderInfo getFinanceProviderInfo() {
-        return null;
-    }
-
-    @Override
-    public KursProviderInfo getKursProviderInfo() {
+    public KursProviderInfo getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
         List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);

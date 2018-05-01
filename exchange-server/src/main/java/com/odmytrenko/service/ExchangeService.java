@@ -1,15 +1,13 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.finance.FinanceProviderInfo;
-import com.odmytrenko.model.kurs.KursProviderInfo;
+import com.odmytrenko.model.ExchangeProvider;
 
 public interface ExchangeService {
 
-    FinanceProviderInfo getFinanceProviderInfo();
-    KursProviderInfo getKursProviderInfo();
+    ExchangeProvider getExchangeProviderInfo();
 
 //    default ExchangeProvider getExchangeInfo() {
-//        ExchangeProvider exchangeProvider = this.getFinanceProviderInfo();
+//        ExchangeProvider exchangeProvider = this.getExchangeProviderInfo();
 //
 //        exchangeProvider.setOrgTypes(
 //            Optional.ofNullable(exchangeProvider.getOrgTypes()).orElseGet(() -> BankConstants.ORG_TYPES)

@@ -2,7 +2,6 @@ package com.odmytrenko.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
-import com.odmytrenko.model.kurs.KursProviderInfo;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.io.IOException;
 @Qualifier("finance")
 public class FinanceExchangeService implements ExchangeService {
     @Override
-    public FinanceProviderInfo getFinanceProviderInfo() {
+    public FinanceProviderInfo getExchangeProviderInfo() {
         try {
             String json = Jsoup.connect("http://resources.finance.ua/ru/public/currency-cash.json")
                 .ignoreContentType(true).execute().body();
@@ -23,10 +22,5 @@ public class FinanceExchangeService implements ExchangeService {
             e.printStackTrace();
             throw new RuntimeException("There was an error during parse json object: " + e.getMessage(), e.getCause());
         }
-    }
-
-    @Override
-    public KursProviderInfo getKursProviderInfo() {
-        return null;
     }
 }
