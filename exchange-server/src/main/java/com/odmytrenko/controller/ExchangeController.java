@@ -30,7 +30,7 @@ public class ExchangeController {
     @ResponseBody
     public ExchangeProvider getKursExchangeInfo() {
         exchangeProviderRepository.save(kursExchangeService.getExchangeProviderInfo());
-        return exchangeProviderRepository.findAll().get(0);
+        return exchangeProviderRepository.findAll().get(1);
     }
 
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
