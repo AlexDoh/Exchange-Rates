@@ -6,7 +6,7 @@ import java.util.Map;
 public class BankConstants {
 
     public static final Map<String, String> CURRENCIES;
-    public static final Map<Integer, String> ORG_TYPES;
+    public static final Map<String, String> ORG_TYPES;
 
     static {
         CURRENCIES = new HashMap<>();
@@ -60,7 +60,7 @@ public class BankConstants {
         CURRENCIES.put("USD", "доллары США");
         CURRENCIES.put("VND", "вьетнамские донги");
 
-        ORG_TYPES.put(1, "Банки");
-        ORG_TYPES.put(2, "Обменники");
+        ORG_TYPES.put("1", "Банки");
+        ORG_TYPES.put("2", "Обменники");
     }
 }
