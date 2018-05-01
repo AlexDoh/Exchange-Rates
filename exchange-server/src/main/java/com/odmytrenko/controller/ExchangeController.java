@@ -1,9 +1,7 @@
 package com.odmytrenko.controller;
 
-import com.odmytrenko.dao.FinanceProviderRepository;
-import com.odmytrenko.dao.KursProviderRepository;
-import com.odmytrenko.model.finance.FinanceProviderInfo;
-import com.odmytrenko.model.kurs.KursProviderInfo;
+import com.odmytrenko.dao.ExchangeProviderRepository;
+import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,22 +24,19 @@ public class ExchangeController {
     private ExchangeService financeExchangeService;
 
     @Autowired
-    private FinanceProviderRepository financeProviderRepository;
-
-    @Autowired
-    private KursProviderRepository kursProviderRepository;
+    private ExchangeProviderRepository exchangeProviderRepository;
 
     @RequestMapping(path = "/kurs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public KursProviderInfo getKursExchangeInfo() {
-        kursProviderRepository.save(kursExchangeService.getKursProviderInfo());
-        return kursProviderRepository.findAll().get(0);
+    public ExchangeProvider getKursExchangeInfo() {
+        exchangeProviderRepository.save(kursExchangeService.getExchangeProviderInfo());
+        return exchangeProviderRepository.findAll().get(0);
     }
 
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public FinanceProviderInfo getFinanceExchangeInfo() {
-        financeProviderRepository.save(financeExchangeService.getFinanceProviderInfo());
-        return financeProviderRepository.findAll().get(0);
+    public ExchangeProvider getFinanceExchangeInfo() {
+        exchangeProviderRepository.save(financeExchangeService.getExchangeProviderInfo());
+        return exchangeProviderRepository.findAll().get(0);
     }
 }
