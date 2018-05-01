@@ -1,5 +1,7 @@
 package com.odmytrenko.service;
 
+import com.odmytrenko.dao.ExchangeProviderRepository;
+import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursOrganization;
 import com.odmytrenko.model.kurs.KursProviderInfo;
@@ -7,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +24,19 @@ import java.util.UUID;
 @Qualifier("kurs")
 public class KursExchangeService implements ExchangeService {
 
+    @Autowired
+    ExchangeProviderRepository exchangeProviderRepository;
+
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
         kursProviderInfo.setTitle("Kurs.com.ua");
         kursProviderInfo.setLink("https://kurs.com.ua/");
+
+        FinanceProviderInfo financeProviderInfo = (FinanceProviderInfo) exchangeProviderRepository.findAll().stream().filter(provider -> provider.getTitle().equals("Finance.ua")).findFirst().get();
+        kursProviderInfo.setOrgTypes(financeProviderInfo.getOrgTypes());
+        kursProviderInfo.setCurrencies(financeProviderInfo.getCurrencies());
+
         List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
