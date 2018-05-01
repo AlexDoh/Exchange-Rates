@@ -1,8 +1,8 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.model.ExchangeProvider;
-import com.odmytrenko.model.kurs.KursOrganization;
+import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
+import com.odmytrenko.model.kurs.KursOrganization;
 import com.odmytrenko.model.kurs.KursProviderInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,16 +14,21 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @Qualifier("kurs")
 public class KursExchangeService implements ExchangeService {
 
     @Override
-    public ExchangeProvider getExchangeProviderInfo() {
+    public FinanceProviderInfo getFinanceProviderInfo() {
+        return null;
+    }
+
+    @Override
+    public KursProviderInfo getKursProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
         List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
@@ -42,7 +47,7 @@ public class KursExchangeService implements ExchangeService {
                 if (bankName.isEmpty()) {
                     continue;
                 }
-
+                kursOrganization.setId(UUID.randomUUID().toString());
                 kursOrganization.setTitle(bankName.get(0).text().replace("Курс валют — ", ""));
                 kursOrganization.setLink(document.location());
                 kursOrganization.setAddress(document.getElementsByAttributeValue("title", "Показать на карте").text());
