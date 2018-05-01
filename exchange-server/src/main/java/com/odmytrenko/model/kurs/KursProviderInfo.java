@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.List;
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
@@ -22,6 +24,10 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID", referencedColumnName = "PROVIDER_ID")
 public class KursProviderInfo extends ExchangeProvider {
 
+    @Transient
+    private Map<String, String> orgTypes;
+    @Transient
+    private Map<String, String> currencies;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "PROVIDER_ID")
     private List<KursOrganization> organizations;
