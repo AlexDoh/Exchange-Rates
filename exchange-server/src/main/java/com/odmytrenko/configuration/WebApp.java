@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,6 +21,7 @@ import java.util.Collections;
 @EnableJpaRepositories(basePackages = "com.odmytrenko.dao")
 @EntityScan("com.odmytrenko.model")
 @ComponentScan("com.odmytrenko.*")
+@EnableConfigurationProperties(ProvidersProperties.class)
 public class WebApp {
 
     public static void main(String[] args) {

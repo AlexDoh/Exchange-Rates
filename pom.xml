@@ -23,7 +23,6 @@
     </modules>
 
     <properties>
-        <spring.boot.version>2.0.0.RELEASE</spring.boot.version>
         <jackson.version>2.9.4</jackson.version>
         <lombok.version>1.16.20</lombok.version>
         <jsoup.version>1.11.2</jsoup.version>
@@ -88,6 +87,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
