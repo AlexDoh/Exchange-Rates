@@ -1,5 +1,6 @@
 package com.odmytrenko.service;
 
+import com.odmytrenko.configuration.ProvidersProperties;
 import com.odmytrenko.dao.ExchangeProviderRepository;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
@@ -27,11 +28,14 @@ public class KursExchangeService implements ExchangeService {
     @Autowired
     ExchangeProviderRepository exchangeProviderRepository;
 
+    @Autowired
+    ProvidersProperties providersProperties;
+
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
-        kursProviderInfo.setTitle("Kurs.com.ua");
-        kursProviderInfo.setLink("https://kurs.com.ua/");
+        kursProviderInfo.setTitle(providersProperties.getKurs().get("name"));
+        kursProviderInfo.setLink(providersProperties.getKurs().get("link"));
 
         FinanceProviderInfo financeProviderInfo = (FinanceProviderInfo) exchangeProviderRepository.findAll().stream().filter(provider -> provider.getTitle().equals("Finance.ua")).findFirst().get();
         kursProviderInfo.setOrgTypes(financeProviderInfo.getOrgTypes());
