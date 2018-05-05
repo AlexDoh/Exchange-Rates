@@ -23,9 +23,3 @@ providers:
   kurs:
     name: Kurs.com.ua
     link: https://kurs.com.ua/
-
-logging:
-  level:
-    org.springframework.web: DEBUG
-    com.odmytrenko.controller: DEBUG
-    org.hibernate: DEBUG
