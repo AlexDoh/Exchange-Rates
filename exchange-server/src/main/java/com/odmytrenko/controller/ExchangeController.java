@@ -42,25 +42,11 @@ public class ExchangeController {
         return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(path = "/kurs/save", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity saveKursExchangeInfo() {
-        if (kursExchangeService.existsByTitle(TITLE_KURS_COM_UA)) {
-            return ResponseEntity.ok(kursExchangeService.findByTitle(TITLE_KURS_COM_UA));
-        } else {
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-            return ResponseEntity.created(location).body(kursExchangeService.save(kursExchangeService.getExchangeProviderInfo()));
-        }
-    }
-
     @RequestMapping(path = "/kurs/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ExchangeProvider updateKursExchangeInfo() {
-        ExchangeProvider exchangeProvider = kursExchangeService.findByTitle(TITLE_KURS_COM_UA);
-//        if (kursExchangeService.existsById(exchangeProvider.getId())) {
-//
-//        }
-        return kursExchangeService.save(kursExchangeService.getExchangeProviderInfo());
+    public ResponseEntity updateKursExchangeInfo() {
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+        return ResponseEntity.created(location).body(kursExchangeService.save(kursExchangeService.getExchangeProviderInfo()));
     }
 
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,21 +56,11 @@ public class ExchangeController {
         return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(path = "/finance/save", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity saveFinanceExchangeInfo() {
-        if (financeExchangeService.existsByTitle(TITLE_FINANCE_UA)) {
-            return ResponseEntity.ok(financeExchangeService.findByTitle(TITLE_FINANCE_UA));
-        } else {
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-            return ResponseEntity.created(location).body(financeExchangeService.save(financeExchangeService.getExchangeProviderInfo()));
-        }
-    }
-
     @RequestMapping(path = "/finance/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ExchangeProvider updateFinanceExchangeInfo() {
-        return financeExchangeService.save(financeExchangeService.getExchangeProviderInfo());
+    public ResponseEntity updateFinanceExchangeInfo() {
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+        return ResponseEntity.created(location).body(financeExchangeService.save(financeExchangeService.getExchangeProviderInfo()));
     }
 
 }
