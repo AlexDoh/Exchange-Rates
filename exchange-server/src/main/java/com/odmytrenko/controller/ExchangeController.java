@@ -1,6 +1,8 @@
 package com.odmytrenko.controller;
 
 import com.odmytrenko.model.ExchangeProvider;
+import com.odmytrenko.model.finance.FinanceProviderInfo;
+import com.odmytrenko.model.kurs.KursProviderInfo;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,28 +39,28 @@ public class ExchangeController {
 
     @RequestMapping(path = "/kurs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<ExchangeProvider> getKursExchangeInfo() {
+    public ResponseEntity<KursProviderInfo> getKursExchangeInfo() {
         Optional<ExchangeProvider> exchangeProvider = kursExchangeService.findById(TITLE_KURS_COM_UA);
-        return exchangeProvider.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return exchangeProvider.map(provider -> (KursProviderInfo) provider).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/kurs/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity updateKursExchangeInfo() {
+    public ResponseEntity<ExchangeProvider> updateKursExchangeInfo() {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).body(kursExchangeService.save(kursExchangeService.getExchangeProviderInfo()));
     }
 
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<ExchangeProvider> getFinanceExchangeInfo() {
+    public ResponseEntity<FinanceProviderInfo> getFinanceExchangeInfo() {
         Optional<ExchangeProvider> exchangeProvider = financeExchangeService.findById(TITLE_FINANCE_UA);
-        return exchangeProvider.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return exchangeProvider.map(provider -> (FinanceProviderInfo) provider).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/finance/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity updateFinanceExchangeInfo() {
+    public ResponseEntity<ExchangeProvider> updateFinanceExchangeInfo() {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).body(financeExchangeService.save(financeExchangeService.getExchangeProviderInfo()));
     }
