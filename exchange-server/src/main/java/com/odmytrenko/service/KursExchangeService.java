@@ -1,6 +1,7 @@
 package com.odmytrenko.service;
 
 import com.odmytrenko.dao.ExchangeProviderRepository;
+import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
 import com.odmytrenko.model.kurs.KursOrganization;
@@ -105,6 +106,21 @@ public class KursExchangeService implements ExchangeService {
             }
         }
         return kursProviderInfo;
+    }
+
+    @Override
+    public ExchangeProvider save(ExchangeProvider provider) {
+        return exchangeProviderRepository.save(provider);
+    }
+
+    @Override
+    public boolean existsByTitle(String title) {
+        return exchangeProviderRepository.existsByTitle(title);
+    }
+
+    @Override
+    public ExchangeProvider findByTitle(String title) {
+        return exchangeProviderRepository.findByTitle(title);
     }
 
     private String getRateValue(Element currencyRow, String rateType) {

@@ -9,5 +9,5 @@ public interface ExchangeProviderRepository extends JpaRepository<ExchangeProvid
 
     ExchangeProvider findByTitle(String title);
 
-    boolean existsExchangeProviderByTitle(String title);
+    boolean existsByTitle (String title);
 }

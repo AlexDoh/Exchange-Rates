@@ -1,7 +1,8 @@
 package com.odmytrenko.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.odmytrenko.configuration.ProvidersProperties;
+import com.odmytrenko.dao.ExchangeProviderRepository;
+import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ public class FinanceExchangeService implements ExchangeService {
 
     private static final Logger LOG = LoggerFactory.getLogger(FinanceExchangeService.class);
 
+    @Autowired
+    ExchangeProviderRepository exchangeProviderRepository;
+
     @Value("${providers.finance.url}")
     private String URL;
 
@@ -27,9 +31,6 @@ public class FinanceExchangeService implements ExchangeService {
 
     @Value("${providers.finance.link}")
     private String LINK_FINANCE_COM_UA;
-
-    @Autowired
-    ProvidersProperties providersProperties;
 
     @Override
     public FinanceProviderInfo getExchangeProviderInfo() {
@@ -46,5 +47,20 @@ public class FinanceExchangeService implements ExchangeService {
             e.printStackTrace();
             throw new RuntimeException("There was an error during parse json object: " + e.getMessage(), e.getCause());
         }
+    }
+
+    @Override
+    public ExchangeProvider save(ExchangeProvider provider) {
+        return exchangeProviderRepository.save(provider);
+    }
+
+    @Override
+    public boolean existsByTitle(String title) {
+        return exchangeProviderRepository.existsByTitle(title);
+    }
+
+    @Override
+    public ExchangeProvider findByTitle(String title) {
+        return exchangeProviderRepository.findByTitle(title);
     }
 }
