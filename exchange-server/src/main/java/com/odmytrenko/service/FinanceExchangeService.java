@@ -35,7 +35,7 @@ public class FinanceExchangeService implements ExchangeService {
 
     @Override
     public FinanceProviderInfo getExchangeProviderInfo() {
-        LOG.info("Requesting provider info from {}", URL);
+        LOG.info("Requesting finance provider info from {}", URL);
         try {
             String json = Jsoup.connect(URL)
                 .ignoreContentType(true).execute().body();
@@ -45,8 +45,7 @@ public class FinanceExchangeService implements ExchangeService {
             financeProviderInfo.setLink(LINK_FINANCE_COM_UA);
             return financeProviderInfo;
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("There was an error during parse json object: " + e.getMessage(), e.getCause());
+            throw new RuntimeException("Error getting finance provider info: " + e.getMessage(), e.getCause());
         }
     }
 

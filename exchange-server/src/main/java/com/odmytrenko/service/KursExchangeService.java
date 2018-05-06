@@ -10,6 +10,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,8 @@ import java.util.UUID;
 @Qualifier("kurs")
 public class KursExchangeService implements ExchangeService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FinanceExchangeService.class);
+
     @Autowired
     ExchangeProviderRepository exchangeProviderRepository;
 
@@ -41,6 +45,7 @@ public class KursExchangeService implements ExchangeService {
 
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
+        LOG.info("Requesting kurs provider info from {}", URL);
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
         kursProviderInfo.setTitle(TITLE_KURS_UA);
         kursProviderInfo.setLink(LINK_KURS_COM_UA);
@@ -53,26 +58,35 @@ public class KursExchangeService implements ExchangeService {
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
         for (int i = 1; i < 400; i++) {
-            StringBuilder url = new StringBuilder(LINK_KURS_COM_UA);
+            StringBuilder url = new StringBuilder(URL);
             url.append(i);
             url.append("-a/");
 
             KursOrganization kursOrganization = new KursOrganization();
 
             try {
+                LOG.info("Requesting kurs provider info from page {}", url);
                 Document document = Jsoup.connect(url.toString()).ignoreHttpErrors(true).get();
 
+                kursOrganization.setId(UUID.randomUUID().toString());
                 Elements bankName = document.getElementsByClass("ipsType_pageTitle");
+
                 if (bankName.isEmpty()) {
+                    LOG.debug("This kurs provider bank page {} doesn't exist", url);
                     continue;
                 }
-                kursOrganization.setId(UUID.randomUUID().toString());
-                kursOrganization.setTitle(bankName.get(0).text().replace("Курс валют — ", ""));
+
+                String bankNameString = bankName.get(0).text().replace("Курс валют — ", "");
+                LOG.debug("Kurs provider bankName from page {} - {}", url, bankNameString);
+                kursOrganization.setTitle(bankNameString);
                 kursOrganization.setLink(document.location());
                 kursOrganization.setAddress(document.getElementsByAttributeValue("title", "Показать на карте").text());
                 Elements phone = document.select("div.ipsGrid_span3:contains(Телефоны)");
+
                 if (!phone.isEmpty()) {
-                    kursOrganization.setPhone(phone.get(0).siblingElements().get(0).text());
+                    String phoneString = phone.get(0).siblingElements().get(0).text();
+                    LOG.debug("Kurs provider phone from page {} - {}", url, phoneString);
+                    kursOrganization.setPhone(phoneString);
                 }
 
                 Elements currencyTables = document.getElementsByTag("tbody");
@@ -86,6 +100,7 @@ public class KursExchangeService implements ExchangeService {
                 currencyTable.getElementsByTag("tr").forEach((row) -> {
                     String currencyType = row.getElementsByClass("ipsKursTable_currency")
                         .get(0).getElementsByTag("a").get(0).text();
+                    LOG.debug("Kurs provider currencyType from page {} - {}", url, currencyType);
 
                     KursCurrencyRates kursCurrencyRates = new KursCurrencyRates();
 
@@ -103,7 +118,7 @@ public class KursExchangeService implements ExchangeService {
                 kursOrganization.setCurrencies(kursCurrencyRatesMap);
                 kursOrganizationSet.add(kursOrganization);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException("Error getting kurs provider info: " + e.getMessage(), e.getCause());
             }
         }
         return kursProviderInfo;
