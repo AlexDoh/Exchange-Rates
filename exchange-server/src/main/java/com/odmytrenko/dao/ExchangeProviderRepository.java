@@ -8,4 +8,6 @@ import java.util.UUID;
 public interface ExchangeProviderRepository extends JpaRepository<ExchangeProvider, UUID> {
 
     ExchangeProvider findByTitle(String title);
+
+    boolean existsExchangeProviderByTitle(String title);
 }
