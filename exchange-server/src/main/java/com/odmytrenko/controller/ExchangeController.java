@@ -37,9 +37,9 @@ public class ExchangeController {
 
     @RequestMapping(path = "/kurs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity getKursExchangeInfo() {
-        ExchangeProvider exchangeProvider = kursExchangeService.findByTitle(TITLE_KURS_COM_UA);
-        return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<ExchangeProvider> getKursExchangeInfo() {
+        Optional<ExchangeProvider> exchangeProvider = kursExchangeService.findById(TITLE_KURS_COM_UA);
+        return exchangeProvider.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/kurs/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,8 +52,8 @@ public class ExchangeController {
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<ExchangeProvider> getFinanceExchangeInfo() {
-        ExchangeProvider exchangeProvider = financeExchangeService.findByTitle(TITLE_FINANCE_UA);
-        return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<ExchangeProvider> exchangeProvider = financeExchangeService.findById(TITLE_FINANCE_UA);
+        return exchangeProvider.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/finance/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

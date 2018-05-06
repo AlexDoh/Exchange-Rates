@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -114,13 +115,13 @@ public class KursExchangeService implements ExchangeService {
     }
 
     @Override
-    public boolean existsByTitle(String title) {
-        return exchangeProviderRepository.existsByTitle(title);
+    public boolean existsById(String title) {
+        return exchangeProviderRepository.existsById(title);
     }
 
     @Override
-    public ExchangeProvider findByTitle(String title) {
-        return exchangeProviderRepository.findByTitle(title);
+    public Optional<ExchangeProvider> findById(String title) {
+        return exchangeProviderRepository.findById(title);
     }
 
     private String getRateValue(Element currencyRow, String rateType) {

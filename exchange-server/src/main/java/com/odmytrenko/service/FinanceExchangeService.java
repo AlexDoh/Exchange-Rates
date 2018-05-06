@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Qualifier("finance")
@@ -55,12 +56,12 @@ public class FinanceExchangeService implements ExchangeService {
     }
 
     @Override
-    public boolean existsByTitle(String title) {
-        return exchangeProviderRepository.existsByTitle(title);
+    public boolean existsById(String title) {
+        return exchangeProviderRepository.existsById(title);
     }
 
     @Override
-    public ExchangeProvider findByTitle(String title) {
-        return exchangeProviderRepository.findByTitle(title);
+    public Optional<ExchangeProvider> findById(String title) {
+        return exchangeProviderRepository.findById(title);
     }
 }
