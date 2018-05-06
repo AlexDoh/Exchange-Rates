@@ -8,8 +8,8 @@ export const environment = {
   api: {
     exchange: {
       get: {
-        finance: 'http://localhost:8080/rates/finance',
-        kurs: 'http://localhost:8080/rates/kurs'
+        finance: 'http://localhost:8888/rates/finance',
+        kurs: 'http://localhost:8888/rates/kurs'
       }
     }
   }
