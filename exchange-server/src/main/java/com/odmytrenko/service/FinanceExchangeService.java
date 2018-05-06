@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,7 +18,15 @@ import java.io.IOException;
 public class FinanceExchangeService implements ExchangeService {
 
     private static final Logger LOG = LoggerFactory.getLogger(FinanceExchangeService.class);
-    private static final String URL = "http://resources.finance.ua/ru/public/currency-cash.json";
+
+    @Value("${providers.finance.url}")
+    private String URL;
+
+    @Value("${providers.finance.name}")
+    private String TITLE_FINANCE_UA;
+
+    @Value("${providers.finance.link}")
+    private String LINK_FINANCE_COM_UA;
 
     @Autowired
     ProvidersProperties providersProperties;
@@ -30,8 +39,8 @@ public class FinanceExchangeService implements ExchangeService {
                 .ignoreContentType(true).execute().body();
             ObjectMapper mapper = new ObjectMapper();
             FinanceProviderInfo financeProviderInfo = mapper.readValue(json, FinanceProviderInfo.class);
-            financeProviderInfo.setTitle(providersProperties.getFinance().get("name"));
-            financeProviderInfo.setLink(providersProperties.getFinance().get("link"));
+            financeProviderInfo.setTitle(TITLE_FINANCE_UA);
+            financeProviderInfo.setLink(LINK_FINANCE_COM_UA);
             return financeProviderInfo;
         } catch (IOException e) {
             e.printStackTrace();
