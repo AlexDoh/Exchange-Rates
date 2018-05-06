@@ -1,5 +1,11 @@
 package com.odmytrenko.configuration;
 
+import com.odmytrenko.job.UpdateKursProviderJob;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,5 +47,19 @@ public class WebApp {
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
+    }
+
+    @Bean
+    public JobDetail updateKursProviderJobDetail() {
+        return JobBuilder.newJob(UpdateKursProviderJob.class).withIdentity("updateKursProviderJob").storeDurably().build();
+    }
+
+    @Bean
+    public Trigger updateKursProviderJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+            .withIntervalInHours(1).repeatForever();
+
+        return TriggerBuilder.newTrigger().forJob(updateKursProviderJobDetail())
+            .withIdentity("updateKursProviderTrigger").withSchedule(scheduleBuilder).build();
     }
 }
