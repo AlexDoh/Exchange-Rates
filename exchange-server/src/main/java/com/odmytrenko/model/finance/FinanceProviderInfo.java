@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -23,6 +24,7 @@ import java.util.Map;
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString
 @Entity
 @Table(name = "PROVIDERS_FINANCE")
 @PrimaryKeyJoinColumn(name = "FINANCE_PROVIDER_ID", referencedColumnName = "ID")

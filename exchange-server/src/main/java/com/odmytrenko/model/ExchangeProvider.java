@@ -2,6 +2,7 @@ package com.odmytrenko.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
+@ToString
 @Entity
 @Table(name = "PROVIDERS")
 @Inheritance(strategy = InheritanceType.JOINED)

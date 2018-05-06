@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,8 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString
 @Entity
 @Table(name = "PROVIDERS_KURS")
 @PrimaryKeyJoinColumn(name = "KURS_PROVIDER_ID", referencedColumnName = "ID")

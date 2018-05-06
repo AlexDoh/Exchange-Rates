@@ -7,6 +7,7 @@ import com.odmytrenko.model.ExchangeOrganization;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import java.util.Map;
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(exclude = "provider")
 @Entity
 @Table(name = "ORGANIZATIONS_FINANCE")
 @PrimaryKeyJoinColumn(name = "FINANCE_ORGANIZATION_ID", referencedColumnName = "ID")
