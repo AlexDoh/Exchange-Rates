@@ -22,7 +22,7 @@ public class FinanceExchangeService implements ExchangeService {
     @Value("${providers.finance.url}")
     private String URL;
 
-    @Value("${providers.finance.name}")
+    @Value("${providers.finance.title}")
     private String TITLE_FINANCE_UA;
 
     @Value("${providers.finance.link}")

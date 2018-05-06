@@ -21,10 +21,10 @@ import java.util.Optional;
 @RequestMapping(path = "/rates")
 public class ExchangeController {
 
-    @Value("${providers.kurs.name}")
+    @Value("${providers.kurs.title}")
     private String TITLE_KURS_COM_UA;
 
-    @Value("${providers.finance.name}")
+    @Value("${providers.finance.title}")
     private String TITLE_FINANCE_UA;
 
     @Autowired

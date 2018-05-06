@@ -1,6 +1,5 @@
 package com.odmytrenko.service;
 
-import com.odmytrenko.configuration.ProvidersProperties;
 import com.odmytrenko.dao.ExchangeProviderRepository;
 import com.odmytrenko.model.finance.FinanceProviderInfo;
 import com.odmytrenko.model.kurs.KursCurrencyRates;
@@ -12,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,14 +28,20 @@ public class KursExchangeService implements ExchangeService {
     @Autowired
     ExchangeProviderRepository exchangeProviderRepository;
 
-    @Autowired
-    ProvidersProperties providersProperties;
+    @Value("${providers.kurs.url}")
+    private String URL;
+
+    @Value("${providers.kurs.title}")
+    private String TITLE_KURS_UA;
+
+    @Value("${providers.kurs.link}")
+    private String LINK_KURS_COM_UA;
 
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
         KursProviderInfo kursProviderInfo = new KursProviderInfo();
-        kursProviderInfo.setTitle(providersProperties.getKurs().get("name"));
-        kursProviderInfo.setLink(providersProperties.getKurs().get("link"));
+        kursProviderInfo.setTitle(TITLE_KURS_UA);
+        kursProviderInfo.setLink(LINK_KURS_COM_UA);
 
         FinanceProviderInfo financeProviderInfo = (FinanceProviderInfo) exchangeProviderRepository.findAll().stream().filter(provider -> provider.getTitle().equals("Finance.ua")).findFirst().get();
         kursProviderInfo.setOrgTypes(financeProviderInfo.getOrgTypes());
@@ -45,7 +51,7 @@ public class KursExchangeService implements ExchangeService {
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
         for (int i = 1; i < 400; i++) {
-            StringBuilder url = new StringBuilder("https://kurs.com.ua/bank/");
+            StringBuilder url = new StringBuilder(LINK_KURS_COM_UA);
             url.append(i);
             url.append("-a/");
 

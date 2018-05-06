@@ -18,9 +18,10 @@ server:
 
 providers:
   finance:
-    name: Finance.ua
+    title: Finance.ua
     link: https://finance.ua/
     url: http://resources.finance.ua/ru/public/currency-cash.json
   kurs:
-    name: Kurs.com.ua
+    title: Kurs.com.ua
     link: https://kurs.com.ua/
+    url: https://kurs.com.ua/bank/
