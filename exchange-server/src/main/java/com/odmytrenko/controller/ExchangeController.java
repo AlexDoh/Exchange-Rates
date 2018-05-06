@@ -5,6 +5,7 @@ import com.odmytrenko.model.ExchangeProvider;
 import com.odmytrenko.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,12 @@ import java.util.Optional;
 @RequestMapping(path = "/rates")
 public class ExchangeController {
 
+    @Value("${providers.kurs.name}")
+    private String TITLE_KURS_COM_UA;
+
+    @Value("${providers.finance.name}")
+    private String TITLE_FINANCE_UA;
+
     @Autowired
     @Qualifier("kurs")
     private ExchangeService kursExchangeService;
@@ -34,15 +41,15 @@ public class ExchangeController {
     @RequestMapping(path = "/kurs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getKursExchangeInfo() {
-        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle("Kurs.com.ua");
+        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle(TITLE_KURS_COM_UA);
         return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/kurs/save", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity saveKursExchangeInfo() {
-        if (exchangeProviderRepository.existsExchangeProviderByTitle("Kurs.com.ua")) {
-            return ResponseEntity.ok(exchangeProviderRepository.findByTitle("Kurs.com.ua"));
+        if (exchangeProviderRepository.existsExchangeProviderByTitle(TITLE_KURS_COM_UA)) {
+            return ResponseEntity.ok(exchangeProviderRepository.findByTitle(TITLE_KURS_COM_UA));
         } else {
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
             return ResponseEntity.created(location).body(exchangeProviderRepository.save(kursExchangeService.getExchangeProviderInfo()));
@@ -52,7 +59,7 @@ public class ExchangeController {
     @RequestMapping(path = "/kurs/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ExchangeProvider updateKursExchangeInfo() {
-        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle("Kurs.com.ua");
+        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle(TITLE_KURS_COM_UA);
         if (exchangeProviderRepository.existsById(exchangeProvider.getId())) {
 
         }
@@ -62,15 +69,15 @@ public class ExchangeController {
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<ExchangeProvider> getFinanceExchangeInfo() {
-        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle("Finance.ua");
+        ExchangeProvider exchangeProvider = exchangeProviderRepository.findByTitle(TITLE_FINANCE_UA);
         return Optional.of(ResponseEntity.ok(exchangeProvider)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(path = "/finance/save", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity saveFinanceExchangeInfo() {
-        if (exchangeProviderRepository.existsExchangeProviderByTitle("Finance.ua")) {
-            return ResponseEntity.ok(exchangeProviderRepository.findByTitle("Finance.ua"));
+        if (exchangeProviderRepository.existsExchangeProviderByTitle(TITLE_FINANCE_UA)) {
+            return ResponseEntity.ok(exchangeProviderRepository.findByTitle(TITLE_FINANCE_UA));
         } else {
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
             return ResponseEntity.created(location).body(exchangeProviderRepository.save(financeExchangeService.getExchangeProviderInfo()));
