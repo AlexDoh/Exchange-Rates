@@ -53,10 +53,6 @@ public class KursExchangeService implements ExchangeService {
         kursProviderInfo.setTitle(TITLE_KURS_UA);
         kursProviderInfo.setLink(LINK_KURS_COM_UA);
 
-        FinanceProviderInfo financeProviderInfo = (FinanceProviderInfo) exchangeProviderRepository.findAll().stream().filter(provider -> provider.getTitle().equals("Finance.ua")).findFirst().get();
-        kursProviderInfo.setOrgTypes(financeProviderInfo.getOrgTypes());
-        kursProviderInfo.setCurrencies(financeProviderInfo.getCurrencies());
-
         List<KursOrganization> kursOrganizationSet = new ArrayList<>();
         kursProviderInfo.setOrganizations(kursOrganizationSet);
 
