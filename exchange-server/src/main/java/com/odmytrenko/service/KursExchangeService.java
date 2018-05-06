@@ -43,6 +43,9 @@ public class KursExchangeService implements ExchangeService {
     @Value("${providers.kurs.link}")
     private String LINK_KURS_COM_UA;
 
+    @Value("${providers.finance.title}")
+    private String TITLE_FINANCE_UA;
+
     @Override
     public KursProviderInfo getExchangeProviderInfo() {
         LOG.info("Requesting kurs provider info from {}", URL);
@@ -136,7 +139,18 @@ public class KursExchangeService implements ExchangeService {
 
     @Override
     public Optional<ExchangeProvider> findById(String title) {
-        return exchangeProviderRepository.findById(title);
+        Optional<ExchangeProvider> kursProviderOptional = exchangeProviderRepository.findById(title);
+        Optional<ExchangeProvider> financeProviderOptional = exchangeProviderRepository.findById(TITLE_FINANCE_UA);
+        if (financeProviderOptional.isPresent()) {
+            FinanceProviderInfo financeProvider = (FinanceProviderInfo) financeProviderOptional.get();
+            return kursProviderOptional.map(provider -> {
+                KursProviderInfo kursProvider = (KursProviderInfo) provider;
+                kursProvider.setOrgTypes(financeProvider.getOrgTypes());
+                kursProvider.setCurrencies(financeProvider.getCurrencies());
+                return kursProvider;
+            });
+        }
+        return kursProviderOptional;
     }
 
     private String getRateValue(Element currencyRow, String rateType) {
