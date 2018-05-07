@@ -24,4 +24,5 @@ public abstract class ExchangeOrganization {
     private String link;
     private String address;
     private String phone;
+    private Integer orgType;
 }

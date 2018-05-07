@@ -30,7 +30,6 @@ import java.util.Map;
 public class FinanceOrganization extends ExchangeOrganization {
 
     private Integer oldId;
-    private Integer orgType;
     private Boolean branch;
     private String regionId;
     private String cityId;

@@ -79,6 +79,14 @@ public class KursExchangeService implements ExchangeService {
                 LOG.debug("Kurs provider bankName from page {} - {}", url, bankNameString);
                 kursOrganization.setTitle(bankNameString);
                 kursOrganization.setLink(document.location());
+
+                String bankFullName = document.getElementsByClass("ipsGrid_span9").get(0).text();
+                if (bankFullName.toLowerCase().contains("банк")) {
+                    kursOrganization.setOrgType(1);
+                } else {
+                    kursOrganization.setOrgType(2);
+                }
+
                 kursOrganization.setAddress(document.getElementsByAttributeValue("title", "Показать на карте").text());
                 Elements phone = document.select("div.ipsGrid_span3:contains(Телефоны)");
 
@@ -98,13 +106,13 @@ public class KursExchangeService implements ExchangeService {
                 Map<String, KursCurrencyRates> kursCurrencyRatesMap = new HashMap<>();
                 currencyTable.getElementsByTag("tr").forEach((row) -> {
                     String currencyType = row.getElementsByClass("ipsKursTable_currency")
-                        .get(0).getElementsByTag("a").get(0).text();
+                            .get(0).getElementsByTag("a").get(0).text();
                     LOG.debug("Kurs provider currencyType from page {} - {}", url, currencyType);
 
                     KursCurrencyRates kursCurrencyRates = new KursCurrencyRates();
 
                     kursCurrencyRates.setUpdated(row.getElementsByClass("ipsKursTable_updated")
-                        .get(0).getElementsByTag("time").get(0).attr("datetime"));
+                            .get(0).getElementsByTag("time").get(0).attr("datetime"));
 
                     kursCurrencyRates.setBid(getRateValue(row, "bid"));
                     kursCurrencyRates.setBidChange(getRateChangeValue(row, "bid"));
@@ -154,7 +162,7 @@ public class KursExchangeService implements ExchangeService {
         rateSelector.append(rateType);
         rateSelector.append(']');
         String rate = currencyRow.select(rateSelector.toString()).get(0)
-            .getElementsByClass("ipsKurs_rate").text().replace(',', '.');
+                .getElementsByClass("ipsKurs_rate").text().replace(',', '.');
         if (rate.isEmpty()) {
             return "0";
         } else {
@@ -167,7 +175,7 @@ public class KursExchangeService implements ExchangeService {
         rateSelector.append(rateType);
         rateSelector.append("_change]");
         String rate = currencyRow.select(rateSelector.toString()).get(0)
-            .getElementsByClass("ipsKurs_rateChange").text().replace(',', '.');
+                .getElementsByClass("ipsKurs_rateChange").text().replace(',', '.');
         if (rate.isEmpty()) {
             return "0";
         } else {
