@@ -49,7 +49,7 @@ export class CenterContainerComponent implements OnInit {
     });
   }
 
-  changeProvider(data) {
+  changeProvider(data: ExchangeInfo): void {
     this.exchangeData = data;
     this.exchangeData.currencies.forEach((currencyText, currencyType) => {
       this.priorityCurrencies.includes(currencyType) ?
