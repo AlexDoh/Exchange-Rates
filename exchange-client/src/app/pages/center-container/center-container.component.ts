@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from '../../shared/services/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ExchangeOrganization } from '../../models/exchange-organization';
 import { UtilsService } from "../../shared/services/utils.service";
 
 @Component({
@@ -16,7 +15,7 @@ export class CenterContainerComponent implements OnInit {
   title: string = 'Finance';
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
-  priorityCurrencies: string[] = ['USD', 'EUR', 'RUB'];
+  priorityCurrencies: string[] = [ 'USD', 'EUR', 'RUB' ];
   priorityCurrenciesMap: Map<string, string> = new Map<string, string>();
   regularCurrenciesMap: Map<string, string> = new Map<string, string>();
 
@@ -28,7 +27,7 @@ export class CenterContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestExchangeData();
+    this.requestFinanceExchangeData();
     this.initForm();
     this.selectedCurrency = 'USD';
   }
@@ -42,16 +41,20 @@ export class CenterContainerComponent implements OnInit {
     });
   };
 
-  get priorityCurrenciesArray(): Array<[string, string]> {
+  get priorityCurrenciesArray(): Array<[ string, string ]> {
     return this.utilsService.getArrayFromMapEntries(this.priorityCurrenciesMap.entries());
   }
 
-  get regularCurrenciesArray(): Array<[string, string]> {
+  get regularCurrenciesArray(): Array<[ string, string ]> {
     return this.utilsService.getArrayFromMapEntries(this.regularCurrenciesMap.entries());
   }
 
-  requestExchangeData(): void {
+  requestFinanceExchangeData(): void {
     this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.processExchangeData(result));
+  };
+
+  requestKursExchangeData(): void {
+    this.exchangeService.getKursExchangeInfo().subscribe(result => this.processExchangeData(result));
   };
 
   initForm() {
