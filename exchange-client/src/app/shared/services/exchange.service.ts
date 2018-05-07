@@ -15,4 +15,8 @@ export class ExchangeService {
     return this.http.get<ExchangeInfo>(environment.api.exchange.get.finance).map(result => new ExchangeInfo(result));
   }
 
+  getKursExchangeInfo(): Observable<ExchangeInfo> {
+    return this.http.get<ExchangeInfo>(environment.api.exchange.get.kurs).map(result => new ExchangeInfo(result));
+  }
+
 }

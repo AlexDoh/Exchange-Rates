@@ -13,7 +13,7 @@ export class ExchangeInfo {
     this.currencies = new Map<string, string>(Object.entries(currencies));
     this.orgTypes = new Map<number, string>(
       Object.entries(orgTypes).map<[ number, string ]>(entry => [ +entry[ 0 ], entry[ 1 ] ]));
-    this.date = date.toString();
+    date ? this.date = date.toString() : '';
   }
 
   get organizations(): ExchangeOrganization[] {
