@@ -3,7 +3,7 @@ export class ExchangeCurrencyRates {
   private _bid: string;
   private _ask: string;
 
-  private _updated?: string;
+  private _updated?: Date;
   private _bidChange?: string;
   private _askChange?: string;
 
@@ -11,7 +11,7 @@ export class ExchangeCurrencyRates {
     this.bid = bid.toString();
     this.ask = ask.toString();
 
-    this.updated = updated.toString();
+    this.updated = updated;
     this.bidChange = bidChange.toString();
     this.askChange = askChange.toString();
   }
@@ -32,11 +32,11 @@ export class ExchangeCurrencyRates {
     this._ask = value;
   }
 
-  get updated(): string {
+  get updated(): Date {
     return this._updated;
   }
 
-  set updated(value: string) {
+  set updated(value: Date) {
     this._updated = value;
   }
 

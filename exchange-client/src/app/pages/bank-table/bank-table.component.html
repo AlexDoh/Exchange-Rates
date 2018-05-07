@@ -43,7 +43,7 @@
     <tr *ngFor="let organization of exchangeData?.organizations | currency: currencyType | orderBy: column : isDesc">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
       <td>{{exchangeData.orgTypes.get(organization.orgType)}}</td>
-      <td>{{exchangeData.date | date: 'MMM d, y, HH:mm:ss'}}</td>
+      <td>{{(organization.currencies[currencyType].updated || exchangeData.date) | date: 'MMM d, y, HH:mm:ss'}}</td>
       <td>{{organization.currencies[currencyType].bid}}</td>
       <td>{{organization.currencies[currencyType].ask}}</td>
     </tr>

@@ -7,7 +7,7 @@ export class ExchangeInfo {
   private _title: string;
   private _link: string;
 
-  private _date?: string;
+  private _date?: Date;
 
   constructor({ organizations, orgTypes, currencies, title, link, date }: ExchangeInfo) {
     this.organizations = organizations as ExchangeOrganization[];
@@ -17,7 +17,7 @@ export class ExchangeInfo {
     this.title = title;
     this.link = link;
 
-    date ? this.date = date.toString() : '';
+    date ? this.date = date : '';
   }
 
   get organizations(): ExchangeOrganization[] {
@@ -44,11 +44,11 @@ export class ExchangeInfo {
     this._currencies = value;
   }
 
-  get date(): string {
+  get date(): Date {
     return this._date;
   }
 
-  set date(value: string) {
+  set date(value: Date) {
     this._date = value;
   }
 
