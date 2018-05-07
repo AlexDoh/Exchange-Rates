@@ -12,7 +12,7 @@ import { UtilsService } from "../../shared/services/utils.service";
 export class CenterContainerComponent implements OnInit {
 
   exchangeData: ExchangeInfo;
-  title: string = 'Finance';
+  title: string = 'Select provider';
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = [ 'USD', 'EUR', 'RUB' ];

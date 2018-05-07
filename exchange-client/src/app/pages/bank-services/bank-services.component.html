@@ -1,14 +1,10 @@
-<section class="row text-center placeholders">
-  <div class="col-6 col-sm-3 placeholder" (click)="requestFinanceExchangeData()">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
-         class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-    <h4>Finance</h4>
-    <div class="text-muted">Finance</div>
+<section class="d-flex flex-column">
+  <div class="d-flex justify-content-between mt-3">
+    <span>1. Provider Finance.ua</span>
+    <button type="button" class="btn btn-outline-primary" disabled (click)="requestFinanceExchangeData()">Select</button>
   </div>
-  <div class="col-6 col-sm-3 placeholder" (click)="requestKursExchangeData()">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
-         class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-    <h4>Kurs</h4>
-    <span class="text-muted">Kurs</span>
+  <div class="d-flex justify-content-between mt-3">
+    <span>2. Provider Kurs.com.ua</span>
+    <button type="button" class="btn btn-outline-primary" (click)="requestKursExchangeData()">Select</button>
   </div>
 </section>
