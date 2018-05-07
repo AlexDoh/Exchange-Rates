@@ -10,6 +10,8 @@ export class BankServicesComponent implements OnInit {
 
   @Output() onSelectProvider: EventEmitter<any> = new EventEmitter();
 
+  activeProvider: string = 'Finance.ua';
+
   constructor(private exchangeService: ExchangeService) {
   }
 
@@ -18,10 +20,12 @@ export class BankServicesComponent implements OnInit {
   }
 
   requestFinanceExchangeData(): void {
+    this.activeProvider = 'Finance.ua';
     this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.onSelectProvider.emit(result));
   };
 
   requestKursExchangeData(): void {
+    this.activeProvider = 'Kurs.com.ua';
     this.exchangeService.getKursExchangeInfo().subscribe(result => this.onSelectProvider.emit(result));
   };
 
