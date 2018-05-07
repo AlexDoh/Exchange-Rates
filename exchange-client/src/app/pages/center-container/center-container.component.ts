@@ -27,19 +27,9 @@ export class CenterContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestFinanceExchangeData();
     this.initForm();
     this.selectedCurrency = 'USD';
   }
-
-  processExchangeData(exchangeData) {
-    this.exchangeData = exchangeData;
-    this.exchangeData.currencies.forEach((currencyText, currencyType) => {
-      this.priorityCurrencies.includes(currencyType) ?
-        this.priorityCurrenciesMap.set(currencyType, currencyText) :
-        this.regularCurrenciesMap.set(currencyType, currencyText);
-    });
-  };
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {
     return this.utilsService.getArrayFromMapEntries(this.priorityCurrenciesMap.entries());
@@ -49,14 +39,6 @@ export class CenterContainerComponent implements OnInit {
     return this.utilsService.getArrayFromMapEntries(this.regularCurrenciesMap.entries());
   }
 
-  requestFinanceExchangeData(): void {
-    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.processExchangeData(result));
-  };
-
-  requestKursExchangeData(): void {
-    this.exchangeService.getKursExchangeInfo().subscribe(result => this.processExchangeData(result));
-  };
-
   initForm() {
     this.selectCurrencyForm = this.fb.group({
       currency: 'USD',
@@ -64,6 +46,15 @@ export class CenterContainerComponent implements OnInit {
 
     this.selectCurrencyForm.valueChanges.subscribe(value => {
       this.selectedCurrency = value.currency;
+    });
+  }
+
+  changeProvider(data) {
+    this.exchangeData = data;
+    this.exchangeData.currencies.forEach((currencyText, currencyType) => {
+      this.priorityCurrencies.includes(currencyType) ?
+        this.priorityCurrenciesMap.set(currencyType, currencyText) :
+        this.regularCurrenciesMap.set(currencyType, currencyText);
     });
   }
 }
