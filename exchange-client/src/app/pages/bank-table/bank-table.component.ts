@@ -12,7 +12,7 @@ export class BankTableComponent implements OnInit, OnChanges {
   @Input() currencyType: string;
   isDesc: boolean = false;
   column: string = 'title';
-  minAsk: number = Number.MAX_SAFE_INTEGER;
+  minAsk: number;
 
   constructor() {
   }
@@ -26,20 +26,22 @@ export class BankTableComponent implements OnInit, OnChanges {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.exchangeData.currentValue) {
-      this.setMinAskCurrency(changes.exchangeData.currentValue);
+    if (this.exchangeData) {
+      this.setMinAskCurrency(this.exchangeData, null);
+    }
+
+    if (changes.currencyType && !changes.currencyType.firstChange) {
+      this.setMinAskCurrency(this.exchangeData, changes.currencyType.currentValue);
     }
   }
 
-  setMinAskCurrency(exchangeData: ExchangeInfo): void {
-    exchangeData.organizations.forEach(organization => {
-      Object.entries(organization.currencies).filter(([ currencyType ]) =>
-        currencyType === this.currencyType).forEach(([ currencyType, currencyData ]) => {
-        const ask = parseFloat(currencyData.ask);
-        if (ask < this.minAsk) {
-          this.minAsk = ask;
-        }
-      })
+  setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency: string): void {
+    this.minAsk = Number.MAX_SAFE_INTEGER;
+    exchangeData.organizations.filter(organization => organization.currencies[ this.currencyType || newCurrency ]).forEach(organization => {
+      const ask = parseFloat(organization.currencies[ this.currencyType || newCurrency ].ask);
+      if (ask < this.minAsk) {
+        this.minAsk = ask;
+      }
     });
   }
 
