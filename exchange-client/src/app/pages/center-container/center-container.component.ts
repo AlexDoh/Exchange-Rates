@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeService } from '../../shared/services/exchange.service';
+import { ExchangeService } from '../../shared/services/rest/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UtilsService } from "../../shared/services/utils.service";
+import { ProviderService } from "../../shared/services/message/provider.service";
 
 @Component({
   selector: 'app-center-container',
@@ -22,13 +23,13 @@ export class CenterContainerComponent implements OnInit {
   constructor(
     private exchangeService: ExchangeService,
     private utilsService: UtilsService<string, string>,
+    private providerService: ProviderService,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.initForm();
-    this.selectedCurrency = 'USD';
+    this.providerService.currentCurrency.subscribe(currency => this.selectedCurrency = currency);
   }
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {
@@ -46,6 +47,7 @@ export class CenterContainerComponent implements OnInit {
 
     this.selectCurrencyForm.valueChanges.subscribe(value => {
       this.selectedCurrency = value.currency;
+      this.providerService.changeCurrency(value.currency);
     });
   }
 

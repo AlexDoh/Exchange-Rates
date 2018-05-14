@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ExchangeService } from "../../shared/services/exchange.service";
+import { ExchangeService } from "../../shared/services/rest/exchange.service";
 
 @Component({
   selector: 'app-bank-services',

@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ExchangeInfo } from '../../models/exchange-info';
+import { ProviderService } from "../../shared/services/message/provider.service";
+import { ExchangeService } from "../../shared/services/rest/exchange.service";
 
 @Component({
   selector: 'app-bank-table',
@@ -9,15 +11,31 @@ import { ExchangeInfo } from '../../models/exchange-info';
 export class BankTableComponent implements OnInit, OnChanges {
 
   @Input() exchangeData: ExchangeInfo;
-  @Input() currencyType: string;
+  currencyType: string;
   isDesc: boolean = false;
   column: string = 'title';
   minAsk: number;
 
-  constructor() {
-  }
+  constructor(
+    private providerService: ProviderService,
+    private exchangeService: ExchangeService,
+    ) {}
 
   ngOnInit() {
+    this.providerService.currentCurrency.subscribe(currency => {
+      this.currencyType = currency;
+      if (this.exchangeData) {
+
+        this.minAsk = Number.MAX_SAFE_INTEGER;
+        this.exchangeData.organizations.filter(organization => organization.currencies[ currency ]).forEach(organization => {
+          const ask = parseFloat(organization.currencies[ currency ].ask);
+          if (ask < this.minAsk) {
+            this.minAsk = ask;
+          }
+        });
+      }
+    });
+    this.exchangeService.getKursExchangeInfo()
   }
 
   sort(columnName) {
@@ -30,9 +48,9 @@ export class BankTableComponent implements OnInit, OnChanges {
       this.setMinAskCurrency(this.exchangeData);
     }
 
-    if (changes.currencyType && !changes.currencyType.firstChange) {
-      this.setMinAskCurrency(this.exchangeData, changes.currencyType.currentValue);
-    }
+    // if (changes.currencyType && !changes.currencyType.firstChange) {
+    //   this.setMinAskCurrency(this.exchangeData, changes.currencyType.currentValue);
+    // }
   }
 
   setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency?: string): void {

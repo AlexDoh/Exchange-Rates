@@ -9,7 +9,7 @@ import { LeftSidebarComponent } from './pages/left-sidebar/left-sidebar.componen
 import { CenterContainerComponent } from './pages/center-container/center-container.component';
 import { BankServicesComponent } from './pages/bank-services/bank-services.component';
 import { BankTableComponent } from './pages/bank-table/bank-table.component';
-import { ExchangeService } from './shared/services/exchange.service';
+import { ExchangeService } from './shared/services/rest/exchange.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { EntriesPipe } from './shared/pipes/entries.pipe';
@@ -18,6 +18,7 @@ import { CurrencyPipe } from './shared/pipes/currency.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { UtilsService } from "./shared/services/utils.service";
+import { ProviderService } from "./shared/services/message/provider.service";
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UtilsService } from "./shared/services/utils.service";
   ],
   providers: [
     ExchangeService,
-    UtilsService
+    UtilsService,
+    ProviderService
   ],
   bootstrap: [ AppComponent ]
 })
