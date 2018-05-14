@@ -3,7 +3,7 @@ export const environment = {
   api: {
     exchange: {
       get: {
-        finance: 'http://localhost:8888/rates/finance',
+        finance: 'http://localhost:8888/rates/finance/update',
         kurs: 'http://localhost:8888/rates/kurs'
       }
     }
