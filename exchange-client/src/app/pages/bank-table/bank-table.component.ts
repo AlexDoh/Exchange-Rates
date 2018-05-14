@@ -27,7 +27,7 @@ export class BankTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.exchangeData) {
-      this.setMinAskCurrency(this.exchangeData, null);
+      this.setMinAskCurrency(this.exchangeData);
     }
 
     if (changes.currencyType && !changes.currencyType.firstChange) {
@@ -35,7 +35,7 @@ export class BankTableComponent implements OnInit, OnChanges {
     }
   }
 
-  setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency: string): void {
+  setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency?: string): void {
     this.minAsk = Number.MAX_SAFE_INTEGER;
     exchangeData.organizations.filter(organization => organization.currencies[ this.currencyType || newCurrency ]).forEach(organization => {
       const ask = parseFloat(organization.currencies[ this.currencyType || newCurrency ].ask);
