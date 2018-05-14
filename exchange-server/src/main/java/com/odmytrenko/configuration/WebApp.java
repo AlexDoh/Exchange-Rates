@@ -51,7 +51,7 @@ public class WebApp {
 
     @Bean
     public JobDetail updateKursProviderJobDetail() {
-        return JobBuilder.newJob(UpdateKursProviderJob.class).withIdentity("updateKursProviderJob").storeDurably().build();
+        return JobBuilder.newJob(UpdateKursProviderJob.class).withIdentity("updateKursProviderJob").storeDurably(true).build();
     }
 
     @Bean

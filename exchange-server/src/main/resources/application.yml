@@ -13,6 +13,11 @@ spring:
       hibernate.format_sql: true
       hibernate.dialect: com.odmytrenko.model.H2DialectCustom
 
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
 server:
   port: 8888
 
