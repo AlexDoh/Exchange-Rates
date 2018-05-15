@@ -56,8 +56,7 @@ public class WebApp {
 
     @Bean
     public Trigger updateKursProviderJobTrigger() {
-        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-            .withIntervalInHours(5).repeatForever();
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.repeatHourlyForever(5);
 
         return TriggerBuilder.newTrigger().forJob(updateKursProviderJobDetail())
             .withIdentity("updateKursProviderTrigger").withSchedule(scheduleBuilder).build();
