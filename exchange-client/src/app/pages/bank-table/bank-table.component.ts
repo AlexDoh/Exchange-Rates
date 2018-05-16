@@ -8,24 +8,21 @@ import { ExchangeService } from "../../shared/services/rest/exchange.service";
   templateUrl: './bank-table.component.html',
   styleUrls: [ './bank-table.component.scss' ]
 })
-export class BankTableComponent implements OnInit, OnChanges {
+export class BankTableComponent implements OnInit {
 
-  @Input() exchangeData: ExchangeInfo;
+  exchangeData: ExchangeInfo;
   currencyType: string;
   isDesc: boolean = false;
   column: string = 'title';
   minAsk: number;
 
-  constructor(
-    private providerService: ProviderService,
-    private exchangeService: ExchangeService,
-    ) {}
+  constructor(private providerService: ProviderService) {
+  }
 
   ngOnInit() {
     this.providerService.currentCurrency.subscribe(currency => {
       this.currencyType = currency;
       if (this.exchangeData) {
-
         this.minAsk = Number.MAX_SAFE_INTEGER;
         this.exchangeData.organizations.filter(organization => organization.currencies[ currency ]).forEach(organization => {
           const ask = parseFloat(organization.currencies[ currency ].ask);
@@ -35,23 +32,16 @@ export class BankTableComponent implements OnInit, OnChanges {
         });
       }
     });
-    this.exchangeService.getKursExchangeInfo()
+    this.providerService.subjectProvider.subscribe(exchangeData => {
+      this.exchangeData = exchangeData;
+      this.setMinAskCurrency(this.exchangeData);
+    });
   }
 
   sort(columnName) {
     this.isDesc = !this.isDesc;
     this.column = columnName;
   };
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.exchangeData) {
-      this.setMinAskCurrency(this.exchangeData);
-    }
-
-    // if (changes.currencyType && !changes.currencyType.firstChange) {
-    //   this.setMinAskCurrency(this.exchangeData, changes.currencyType.currentValue);
-    // }
-  }
 
   setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency?: string): void {
     this.minAsk = Number.MAX_SAFE_INTEGER;

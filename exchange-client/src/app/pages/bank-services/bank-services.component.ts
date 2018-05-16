@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ExchangeService } from "../../shared/services/rest/exchange.service";
+import { ProviderService } from "../../shared/services/message/provider.service";
 
 @Component({
   selector: 'app-bank-services',
@@ -12,7 +13,10 @@ export class BankServicesComponent implements OnInit {
 
   activeProvider: string = 'Finance.ua';
 
-  constructor(private exchangeService: ExchangeService) {
+  constructor(
+    private exchangeService: ExchangeService,
+    private providerService: ProviderService
+  ) {
   }
 
   ngOnInit() {
@@ -21,12 +25,12 @@ export class BankServicesComponent implements OnInit {
 
   requestFinanceExchangeData(): void {
     this.activeProvider = 'Finance.ua';
-    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.onSelectProvider.emit(result));
+    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.providerService.subjectProvider.next(result));
   };
 
   requestKursExchangeData(): void {
     this.activeProvider = 'Kurs.com.ua';
-    this.exchangeService.getKursExchangeInfo().subscribe(result => this.onSelectProvider.emit(result));
+    this.exchangeService.getKursExchangeInfo().subscribe(result => this.providerService.subjectProvider.next(result));
   };
 
 }

@@ -3,7 +3,7 @@
     <app-left-sidebar></app-left-sidebar>
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 mt-5">
       <h1>{{title}}</h1>
-      <app-bank-services (onSelectProvider)="changeProvider($event)"></app-bank-services>
+      <app-bank-services></app-bank-services>
       <h2 class="text-center"><a [attr.href]="exchangeData?.link">{{exchangeData?.title}}</a></h2>
       <form [formGroup]="selectCurrencyForm">
         <label>Выберите валюту
@@ -17,7 +17,7 @@
             </option>
           </select></label>
       </form>
-      <app-bank-table [exchangeData]="exchangeData"></app-bank-table>
+      <app-bank-table></app-bank-table>
     </main>
   </div>
 </div>
