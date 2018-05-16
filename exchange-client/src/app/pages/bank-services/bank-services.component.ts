@@ -9,8 +9,6 @@ import { ProviderService } from "../../shared/services/message/provider.service"
 })
 export class BankServicesComponent implements OnInit {
 
-  @Output() onSelectProvider: EventEmitter<any> = new EventEmitter();
-
   activeProvider: string = 'Finance.ua';
 
   constructor(
