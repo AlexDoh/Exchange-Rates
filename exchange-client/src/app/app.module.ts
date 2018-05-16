@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { UtilsService } from "./shared/services/utils.service";
 import { ProviderService } from "./shared/services/message/provider.service";
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProviderService } from "./shared/services/message/provider.service";
     BankTableComponent,
     EntriesPipe,
     CurrencyPipe,
-    WelcomeComponent
+    WelcomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
