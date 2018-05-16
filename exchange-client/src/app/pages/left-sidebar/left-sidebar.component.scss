@@ -32,6 +32,10 @@
 .menu-element {
   background-color: $color-dark-blue;
   color: $color-white;
+
+  &:hover {
+    color: $color-white
+  }
 }
 
 @include media-breakpoint-down(xs) {
