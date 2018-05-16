@@ -15,11 +15,13 @@ export class BankTableComponent implements OnInit {
   isDesc: boolean = false;
   column: string = 'title';
   minAsk: number;
+  isLoading: boolean;
 
   constructor(private providerService: ProviderService) {
   }
 
   ngOnInit() {
+    this.providerService.startedLoadProvider.subscribe(() => this.isLoading = true);
     this.providerService.currentCurrency.subscribe(currency => {
       this.currencyType = currency;
       if (this.exchangeData) {
@@ -32,9 +34,10 @@ export class BankTableComponent implements OnInit {
         });
       }
     });
-    this.providerService.subjectProvider.subscribe(exchangeData => {
+    this.providerService.changeProvider.subscribe(exchangeData => {
       this.exchangeData = exchangeData;
       this.setMinAskCurrency(this.exchangeData);
+      this.isLoading = false;
     });
   }
 

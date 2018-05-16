@@ -39,10 +39,10 @@
       </th>
     </tr>
     </thead>
-    <div class="table__spinner" *ngIf="!exchangeData">
+    <div class="table__spinner" *ngIf="isLoading">
       <mat-spinner aria-label="Loading..."></mat-spinner>
     </div>
-    <tbody>
+    <tbody *ngIf="!isLoading">
     <tr [class.highlighted]="+organization.currencies[currencyType].ask === minAsk"
         *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: column : isDesc">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>

@@ -9,7 +9,8 @@ export class ProviderService {
   private currencySource = new BehaviorSubject<string>(this.defaultCurrency);
   currentCurrency = this.currencySource.asObservable();
 
-  subjectProvider = new Subject<ExchangeInfo>();
+  changeProvider = new Subject<ExchangeInfo>();
+  startedLoadProvider = new Subject<void>();
 
   constructor() { }
 

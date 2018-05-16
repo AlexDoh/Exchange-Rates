@@ -22,13 +22,15 @@ export class BankServicesComponent implements OnInit {
   }
 
   requestFinanceExchangeData(): void {
+    this.providerService.startedLoadProvider.next();
     this.activeProvider = 'Finance.ua';
-    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.providerService.subjectProvider.next(result));
+    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.providerService.changeProvider.next(result));
   };
 
   requestKursExchangeData(): void {
+    this.providerService.startedLoadProvider.next();
     this.activeProvider = 'Kurs.com.ua';
-    this.exchangeService.getKursExchangeInfo().subscribe(result => this.providerService.subjectProvider.next(result));
+    this.exchangeService.getKursExchangeInfo().subscribe(result => this.providerService.changeProvider.next(result));
   };
 
 }
