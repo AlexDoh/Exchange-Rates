@@ -20,6 +20,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { UtilsService } from "./shared/services/utils.service";
 import { ProviderService } from "./shared/services/message/provider.service";
 import { FooterComponent } from './pages/footer/footer.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     OrderModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ExchangeService,
