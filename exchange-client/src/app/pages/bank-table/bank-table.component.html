@@ -1,4 +1,4 @@
-<div class="table-responsive py-5">
+<div class="table-responsive py-5" *ngIf="exchangeData">
   <table class="table table-hover table-striped table-hover-darker">
     <thead class="thead-dark">
     <tr>
@@ -39,12 +39,12 @@
       </th>
     </tr>
     </thead>
-    <div class="table__spinner">
-      <mat-spinner *ngIf="!exchangeData" aria-label="Loading..."></mat-spinner>
+    <div class="table__spinner" *ngIf="!exchangeData">
+      <mat-spinner aria-label="Loading..."></mat-spinner>
     </div>
     <tbody>
     <tr [class.highlighted]="+organization.currencies[currencyType].ask === minAsk"
-        *ngFor="let organization of exchangeData?.organizations | currency: currencyType | orderBy: column : isDesc">
+        *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: column : isDesc">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
       <td>{{exchangeData.orgTypes.get(organization.orgType)}}</td>
       <td>{{(organization.currencies[currencyType].updated || exchangeData.date) | date: 'MMM d, y, HH:mm:ss'}}</td>
