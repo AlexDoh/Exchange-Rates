@@ -14,7 +14,7 @@ export class ExchangeContainerComponent implements OnInit {
 
   exchangeData: ExchangeInfo;
   title = 'Select provider';
-  selectedCurrency: string;
+  selectedCurrency = 'USD';
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = [ 'USD', 'EUR', 'RUB' ];
   priorityCurrenciesMap: Map<string, string> = new Map<string, string>();
@@ -44,7 +44,7 @@ export class ExchangeContainerComponent implements OnInit {
 
   initForm(): void {
     this.selectCurrencyForm = this.fb.group({
-      currency: 'USD',
+      currency: this.selectedCurrency,
     });
 
     this.selectCurrencyForm.valueChanges.subscribe(value => {
