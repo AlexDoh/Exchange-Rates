@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject ,  Subject } from "rxjs";
-import { ExchangeInfo } from "../../../models/exchange-info";
+import { BehaviorSubject ,  Subject } from 'rxjs';
+import { ExchangeInfo } from '../../../models/exchange-info';
 
 @Injectable()
 export class ProviderService {

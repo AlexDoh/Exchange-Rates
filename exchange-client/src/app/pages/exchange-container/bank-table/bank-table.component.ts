@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ExchangeInfo } from '../../../models/exchange-info';
-import { ProviderService } from "../../../shared/services/message/provider.service";
-import { ExchangeService } from "../../../shared/services/rest/exchange.service";
+import { ProviderService } from '../../../shared/services/message/provider.service';
+import { ExchangeService } from '../../../shared/services/rest/exchange.service';
 
 @Component({
   selector: 'app-bank-table',
@@ -12,8 +12,8 @@ export class BankTableComponent implements OnInit {
 
   exchangeData: ExchangeInfo;
   currencyType: string;
-  isDesc: boolean = false;
-  column: string = 'title';
+  isDesc = false;
+  column = 'title';
   minAsk: number;
   isLoading: boolean;
 
@@ -38,7 +38,7 @@ export class BankTableComponent implements OnInit {
   sort(columnName): void {
     this.isDesc = !this.isDesc;
     this.column = columnName;
-  };
+  }
 
   setMinAskCurrency(): void {
     this.minAsk = Number.MAX_SAFE_INTEGER;

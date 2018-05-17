@@ -11,16 +11,16 @@ import { BankServicesComponent } from './pages/exchange-container/bank-services/
 import { BankTableComponent } from './pages/exchange-container/bank-table/bank-table.component';
 import { ExchangeService } from './shared/services/rest/exchange.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { EntriesPipe } from './shared/pipes/entries.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './shared/pipes/currency.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
-import { UtilsService } from "./shared/services/utils.service";
-import { ProviderService } from "./shared/services/message/provider.service";
+import { UtilsService } from './shared/services/utils.service';
+import { ProviderService } from './shared/services/message/provider.service';
 import { FooterComponent } from './pages/footer/footer.component';
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({

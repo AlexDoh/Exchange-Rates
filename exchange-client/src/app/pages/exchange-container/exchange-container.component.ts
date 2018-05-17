@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from '../../shared/services/rest/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UtilsService } from "../../shared/services/utils.service";
-import { ProviderService } from "../../shared/services/message/provider.service";
+import { UtilsService } from '../../shared/services/utils.service';
+import { ProviderService } from '../../shared/services/message/provider.service';
 
 @Component({
   selector: 'app-exchange-container',
@@ -13,7 +13,7 @@ import { ProviderService } from "../../shared/services/message/provider.service"
 export class ExchangeContainerComponent implements OnInit {
 
   exchangeData: ExchangeInfo;
-  title: string = 'Select provider';
+  title = 'Select provider';
   selectedCurrency: string;
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = [ 'USD', 'EUR', 'RUB' ];
