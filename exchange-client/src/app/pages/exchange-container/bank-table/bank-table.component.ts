@@ -41,7 +41,7 @@ export class BankTableComponent implements OnInit {
     });
   }
 
-  sort(columnName) {
+  sort(columnName): void {
     this.isDesc = !this.isDesc;
     this.column = columnName;
   };
