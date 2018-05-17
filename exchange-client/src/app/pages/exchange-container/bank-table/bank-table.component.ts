@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ExchangeInfo } from '../../models/exchange-info';
-import { ProviderService } from "../../shared/services/message/provider.service";
-import { ExchangeService } from "../../shared/services/rest/exchange.service";
+import { ExchangeInfo } from '../../../models/exchange-info';
+import { ProviderService } from "../../../shared/services/message/provider.service";
+import { ExchangeService } from "../../../shared/services/rest/exchange.service";
 
 @Component({
   selector: 'app-bank-table',

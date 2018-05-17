@@ -6,9 +6,9 @@ import { OrderModule } from 'ngx-order-pipe';
 import { AppComponent } from './app.component';
 import { TopHeaderComponent } from './pages/top-header/top-header.component';
 import { LeftSidebarComponent } from './pages/left-sidebar/left-sidebar.component';
-import { CenterContainerComponent } from './pages/center-container/center-container.component';
-import { BankServicesComponent } from './pages/bank-services/bank-services.component';
-import { BankTableComponent } from './pages/bank-table/bank-table.component';
+import { ExchangeContainerComponent } from './pages/exchange-container/exchange-container.component';
+import { BankServicesComponent } from './pages/exchange-container/bank-services/bank-services.component';
+import { BankTableComponent } from './pages/exchange-container/bank-table/bank-table.component';
 import { ExchangeService } from './shared/services/rest/exchange.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
@@ -28,7 +28,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     AppComponent,
     TopHeaderComponent,
     LeftSidebarComponent,
-    CenterContainerComponent,
+    ExchangeContainerComponent,
     BankServicesComponent,
     BankTableComponent,
     EntriesPipe,
