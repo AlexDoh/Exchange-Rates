@@ -35,7 +35,7 @@ rules:
   no-empty-rulesets: 2
   no-extends: 0
   no-ids: 2
-  no-important: 2
+  no-important: 0 # Used only because of Bootstrap
   no-invalid-hex: 2
   no-mergeable-selectors: 2
   no-misspelled-properties:
@@ -63,7 +63,7 @@ rules:
     - 2
     -
       allow-leading-underscore: false
-      convention: hyphenatedlowercase
+      convention: strictbem
   function-name-format:
     - 2
     -
