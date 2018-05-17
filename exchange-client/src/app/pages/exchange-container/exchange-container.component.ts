@@ -30,7 +30,6 @@ export class ExchangeContainerComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.providerService.currentCurrency.subscribe(currency => this.selectedCurrency = currency);
     this.providerService.changeProviderSubject.subscribe(exchangeData => this.changeProvider(exchangeData));
   }
 
@@ -49,7 +48,7 @@ export class ExchangeContainerComponent implements OnInit {
 
     this.selectCurrencyForm.valueChanges.subscribe(value => {
       this.selectedCurrency = value.currency;
-      this.providerService.changeCurrency(value.currency);
+      this.providerService.changeCurrencySubject.next(value.currency);
     });
   }
 

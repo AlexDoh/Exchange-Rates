@@ -22,7 +22,7 @@ export class BankTableComponent implements OnInit {
 
   ngOnInit() {
     this.providerService.startedLoadProviderSubject.subscribe(() => this.isLoading = true);
-    this.providerService.currentCurrency.subscribe(currency => {
+    this.providerService.changeCurrencySubject.subscribe(currency => {
       this.currencyType = currency;
       if (this.exchangeData) {
         this.setMinAskCurrency();
