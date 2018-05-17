@@ -19,6 +19,12 @@
 }
 
 .table {
+  &__row {
+    display: inline-table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
   &__spinner {
     position: absolute;
     top: 110%;
