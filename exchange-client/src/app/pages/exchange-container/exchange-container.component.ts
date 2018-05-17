@@ -25,12 +25,13 @@ export class ExchangeContainerComponent implements OnInit {
     private utilsService: UtilsService<string, string>,
     private providerService: ProviderService,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.initForm();
     this.providerService.currentCurrency.subscribe(currency => this.selectedCurrency = currency);
-    this.providerService.changeProvider.subscribe(exchangeData => this.changeProvider(exchangeData))
+    this.providerService.changeProvider.subscribe(exchangeData => this.changeProvider(exchangeData));
   }
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {
@@ -41,7 +42,7 @@ export class ExchangeContainerComponent implements OnInit {
     return this.utilsService.getArrayFromMapEntries(this.regularCurrenciesMap.entries());
   }
 
-  initForm() {
+  initForm(): void {
     this.selectCurrencyForm = this.fb.group({
       currency: 'USD',
     });
