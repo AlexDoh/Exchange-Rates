@@ -21,22 +21,16 @@ export class BankTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.providerService.startedLoadProvider.subscribe(() => this.isLoading = true);
+    this.providerService.startedLoadProviderSubject.subscribe(() => this.isLoading = true);
     this.providerService.currentCurrency.subscribe(currency => {
       this.currencyType = currency;
       if (this.exchangeData) {
-        this.minAsk = Number.MAX_SAFE_INTEGER;
-        this.exchangeData.organizations.filter(organization => organization.currencies[ currency ]).forEach(organization => {
-          const ask = parseFloat(organization.currencies[ currency ].ask);
-          if (ask < this.minAsk) {
-            this.minAsk = ask;
-          }
-        });
+        this.setMinAskCurrency();
       }
     });
-    this.providerService.changeProvider.subscribe(exchangeData => {
+    this.providerService.changeProviderSubject.subscribe(exchangeData => {
       this.exchangeData = exchangeData;
-      this.setMinAskCurrency(this.exchangeData);
+      this.setMinAskCurrency();
       this.isLoading = false;
     });
   }
@@ -46,10 +40,10 @@ export class BankTableComponent implements OnInit {
     this.column = columnName;
   };
 
-  setMinAskCurrency(exchangeData: ExchangeInfo, newCurrency?: string): void {
+  setMinAskCurrency(): void {
     this.minAsk = Number.MAX_SAFE_INTEGER;
-    exchangeData.organizations.filter(organization => organization.currencies[ this.currencyType || newCurrency ]).forEach(organization => {
-      const ask = parseFloat(organization.currencies[ this.currencyType || newCurrency ].ask);
+    this.exchangeData.organizations.filter(organization => organization.currencies[ this.currencyType ]).forEach(organization => {
+      const ask = parseFloat(organization.currencies[ this.currencyType ].ask);
       if (ask < this.minAsk) {
         this.minAsk = ask;
       }
