@@ -1,4 +1,4 @@
-@import '../../../styles';
+@import '../../../../styles';
 
 .pointer {
   cursor: pointer;
@@ -15,15 +15,21 @@
 }
 
 .highlighted {
-  background-color: #c2daca !important;
+  background-color: $color-light-cyan !important;
 }
 
 .table {
+  &__row {
+    display: inline-table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
   &__spinner {
     position: absolute;
-    left: 50%;
     top: 110%;
-    transform: translate(-50%, -50%);
+    left: 50%;
     margin-bottom: 100px;
+    transform: translate(-50%, -50%);
   }
 }

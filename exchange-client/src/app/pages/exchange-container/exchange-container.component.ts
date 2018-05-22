@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from '../../shared/services/rest/exchange.service';
 import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UtilsService } from "../../shared/services/utils.service";
-import { ProviderService } from "../../shared/services/message/provider.service";
+import { UtilsService } from '../../shared/services/utils.service';
+import { ProviderService } from '../../shared/services/message/provider.service';
 
 @Component({
-  selector: 'app-center-container',
-  templateUrl: './center-container.component.html',
-  styleUrls: [ './center-container.component.scss' ]
+  selector: 'app-exchange-container',
+  templateUrl: './exchange-container.component.html',
+  styleUrls: [ './exchange-container.component.scss' ]
 })
-export class CenterContainerComponent implements OnInit {
+export class ExchangeContainerComponent implements OnInit {
 
   exchangeData: ExchangeInfo;
-  title: string = 'Select provider';
-  selectedCurrency: string;
+  title = 'Select provider';
+  selectedCurrency = 'USD';
   selectCurrencyForm: FormGroup;
   priorityCurrencies: string[] = [ 'USD', 'EUR', 'RUB' ];
   priorityCurrenciesMap: Map<string, string> = new Map<string, string>();
@@ -25,12 +25,12 @@ export class CenterContainerComponent implements OnInit {
     private utilsService: UtilsService<string, string>,
     private providerService: ProviderService,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.initForm();
-    this.providerService.currentCurrency.subscribe(currency => this.selectedCurrency = currency);
-    this.providerService.changeProvider.subscribe(exchangeData => this.changeProvider(exchangeData))
+    this.providerService.changeProviderSubject.subscribe(exchangeData => this.changeProvider(exchangeData));
   }
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {
@@ -41,14 +41,14 @@ export class CenterContainerComponent implements OnInit {
     return this.utilsService.getArrayFromMapEntries(this.regularCurrenciesMap.entries());
   }
 
-  initForm() {
+  initForm(): void {
     this.selectCurrencyForm = this.fb.group({
-      currency: 'USD',
+      currency: this.selectedCurrency,
     });
 
     this.selectCurrencyForm.valueChanges.subscribe(value => {
       this.selectedCurrency = value.currency;
-      this.providerService.changeCurrency(value.currency);
+      this.providerService.changeCurrencySubject.next(value.currency);
     });
   }
 

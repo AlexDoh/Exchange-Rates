@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CurrencyPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if (!value) return;
+    if (!value) { return; }
     return value.filter(organization => organization.currencies[ args ]);
   }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { ExchangeInfo } from '../../../models/exchange-info';
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ExchangeService {

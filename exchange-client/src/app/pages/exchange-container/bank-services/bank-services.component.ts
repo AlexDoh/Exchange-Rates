@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ExchangeService } from "../../shared/services/rest/exchange.service";
-import { ProviderService } from "../../shared/services/message/provider.service";
+import { ExchangeService } from '../../../shared/services/rest/exchange.service';
+import { ProviderService } from '../../../shared/services/message/provider.service';
 
 @Component({
   selector: 'app-bank-services',
@@ -9,7 +9,7 @@ import { ProviderService } from "../../shared/services/message/provider.service"
 })
 export class BankServicesComponent implements OnInit {
 
-  activeProvider: string = 'Finance.ua';
+  activeProvider = 'Finance.ua';
 
   constructor(
     private exchangeService: ExchangeService,
@@ -22,15 +22,15 @@ export class BankServicesComponent implements OnInit {
   }
 
   requestFinanceExchangeData(): void {
-    this.providerService.startedLoadProvider.next();
+    this.providerService.startedLoadProviderSubject.next();
     this.activeProvider = 'Finance.ua';
-    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.providerService.changeProvider.next(result));
-  };
+    this.exchangeService.getFinanceExchangeInfo().subscribe(result => this.providerService.changeProviderSubject.next(result));
+  }
 
   requestKursExchangeData(): void {
-    this.providerService.startedLoadProvider.next();
+    this.providerService.startedLoadProviderSubject.next();
     this.activeProvider = 'Kurs.com.ua';
-    this.exchangeService.getKursExchangeInfo().subscribe(result => this.providerService.changeProvider.next(result));
-  };
+    this.exchangeService.getKursExchangeInfo().subscribe(result => this.providerService.changeProviderSubject.next(result));
+  }
 
 }

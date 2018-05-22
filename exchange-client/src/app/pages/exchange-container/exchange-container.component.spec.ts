@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CenterContainerComponent } from './center-container.component';
+import { ExchangeContainerComponent } from './exchange-container.component';
 
 describe('CenterContainerComponent', () => {
-  let component: CenterContainerComponent;
-  let fixture: ComponentFixture<CenterContainerComponent>;
+  let component: ExchangeContainerComponent;
+  let fixture: ComponentFixture<ExchangeContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CenterContainerComponent ]
+      declarations: [ ExchangeContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CenterContainerComponent);
+    fixture = TestBed.createComponent(ExchangeContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
