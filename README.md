@@ -1,2 +1,2 @@
 # Exchange-Rates
-Html parsing for course rates
+Html parsing for currency rates
