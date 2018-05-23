@@ -1,2 +1,2 @@
 # Exchange-Rates
-Html parsing for currency rates
+Service for currency rates
