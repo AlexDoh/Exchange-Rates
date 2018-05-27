@@ -1,2 +1,2 @@
 # Exchange-Rates
-Services for currency rates
+Services for currency rates of ukrainian banks.
