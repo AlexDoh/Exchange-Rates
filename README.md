@@ -1,2 +1,2 @@
 # Exchange-Rates
-Service for currency rates
+Services for currency rates
