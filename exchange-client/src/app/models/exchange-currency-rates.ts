@@ -1,12 +1,5 @@
 export class ExchangeCurrencyRates {
 
-  private _bid: string;
-  private _ask: string;
-
-  private _updated?: Date;
-  private _bidChange?: string;
-  private _askChange?: string;
-
   constructor({ bid, ask, updated, bidChange, askChange }: ExchangeCurrencyRates) {
     this.bid = bid.toString();
     this.ask = ask.toString();
@@ -15,6 +8,13 @@ export class ExchangeCurrencyRates {
     this.bidChange = bidChange.toString();
     this.askChange = askChange.toString();
   }
+
+  private _bid: string;
+  private _ask: string;
+
+  private _updated?: Date;
+  private _bidChange?: string;
+  private _askChange?: string;
 
   get bid(): string {
     return this._bid;

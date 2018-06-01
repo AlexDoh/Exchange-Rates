@@ -1,13 +1,6 @@
 import { ExchangeOrganization } from './exchange-organization';
 
 export class ExchangeInfo {
-  private _organizations: ExchangeOrganization[];
-  private _orgTypes: Map<number, string>;
-  private _currencies: Map<string, string> = new Map<string, string>();
-  private _title: string;
-  private _link: string;
-
-  private _date?: Date;
 
   constructor({ organizations, orgTypes, currencies, title, link, date }: ExchangeInfo) {
     this.organizations = organizations as ExchangeOrganization[];
@@ -17,8 +10,19 @@ export class ExchangeInfo {
     this.title = title;
     this.link = link;
 
-    date ? this.date = date : '';
+    if (date) {
+      this.date = date;
+    }
   }
+
+  private _organizations: ExchangeOrganization[];
+  private _orgTypes: Map<number, string>;
+  private _currencies: Map<string, string> = new Map<string, string>();
+  private _title: string;
+  private _link: string;
+
+  private _date?: Date;
+
 
   get organizations(): ExchangeOrganization[] {
     return this._organizations;
