@@ -30,7 +30,10 @@ export class ExchangeContainerComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.providerService.changeProviderSubject.subscribe(exchangeData => this.changeProvider(exchangeData));
+    this.providerService.changeProviderSubject.subscribe(exchangeData => {
+      this.providerService.changeCurrencySubject.next(this.selectedCurrency);
+      this.changeProvider(exchangeData);
+    });
   }
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {
