@@ -7,8 +7,8 @@
     "start": "ng serve --source-map",
     "build": "ng build --prod",
     "test": "ng test",
-    "saas-lint": "node ./node_modules/sass-lint-fix/bin/sass-lint -c .sass-lint.yml -v -q",
-    "lint": "npm run saas-lint && ng lint",
+    "sass-lint": "node ./node_modules/sass-lint-fix/bin/sass-lint -c .sass-lint.yml -v -q --fix",
+    "lint": "npm run sass-lint && ng lint",
     "e2e": "ng e2e",
     "prod": "ng build --prod --env=prod"
   },
