@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-public class UpdateKursProviderJob extends QuartzJobBean {
+public class UpdateFinanceProviderJob extends QuartzJobBean {
 
     @Autowired
-    @Qualifier("kurs")
-    private ExchangeService kursExchangeService;
+    @Qualifier("finance")
+    private ExchangeService financeExchangeService;
 
     @Override
     protected void executeInternal(JobExecutionContext context) {
-        kursExchangeService.save(kursExchangeService.getExchangeProviderInfo());
+        financeExchangeService.save(financeExchangeService.getExchangeProviderInfo());
     }
 
 }

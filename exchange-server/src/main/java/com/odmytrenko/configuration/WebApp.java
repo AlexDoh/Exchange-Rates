@@ -1,5 +1,6 @@
 package com.odmytrenko.configuration;
 
+import com.odmytrenko.job.UpdateFinanceProviderJob;
 import com.odmytrenko.job.UpdateKursProviderJob;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -60,5 +61,18 @@ public class WebApp {
 
         return TriggerBuilder.newTrigger().forJob(updateKursProviderJobDetail())
             .withIdentity("updateKursProviderTrigger").withSchedule(scheduleBuilder).build();
+    }
+
+    @Bean
+    public JobDetail updateFinanceProviderJobDetail() {
+        return JobBuilder.newJob(UpdateFinanceProviderJob.class).withIdentity("updateFinanceProviderJob").storeDurably(true).build();
+    }
+
+    @Bean
+    public Trigger updateFinanceProviderJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.repeatHourlyForever(3);
+
+        return TriggerBuilder.newTrigger().forJob(updateFinanceProviderJobDetail())
+                .withIdentity("updateFinanceProviderTrigger").withSchedule(scheduleBuilder).build();
     }
 }
