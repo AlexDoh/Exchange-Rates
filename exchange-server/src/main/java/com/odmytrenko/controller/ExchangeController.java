@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -44,25 +42,11 @@ public class ExchangeController {
         return exchangeProvider.map(provider -> (KursProviderInfo) provider).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(path = "/kurs/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<ExchangeProvider> updateKursExchangeInfo() {
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-        return ResponseEntity.created(location).body(kursExchangeService.save(kursExchangeService.getExchangeProviderInfo()));
-    }
-
     @RequestMapping(path = "/finance", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<FinanceProviderInfo> getFinanceExchangeInfo() {
         Optional<ExchangeProvider> exchangeProvider = financeExchangeService.findById(TITLE_FINANCE_UA);
         return exchangeProvider.map(provider -> (FinanceProviderInfo) provider).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @RequestMapping(path = "/finance/update", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<ExchangeProvider> updateFinanceExchangeInfo() {
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-        return ResponseEntity.created(location).body(financeExchangeService.save(financeExchangeService.getExchangeProviderInfo()));
     }
 
 }
