@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BankTableComponent } from './bank-table.component';
+import { MatSpinner } from '@angular/material';
+import { OrderPipe } from 'ngx-order-pipe';
 
 describe('BankTableComponent', () => {
   let component: BankTableComponent;
@@ -8,9 +10,13 @@ describe('BankTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BankTableComponent ]
+      declarations: [
+        BankTableComponent,
+        MatSpinner,
+        OrderPipe
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

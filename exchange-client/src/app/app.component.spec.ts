@@ -1,10 +1,19 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TopHeaderComponent } from './pages/top-header/top-header.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { RouterTestingModule } from '@angular/router/testing';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ RouterTestingModule.withRoutes([]) ],
       declarations: [
-        AppComponent
+        AppComponent,
+        TopHeaderComponent,
+        FooterComponent,
+        WelcomeComponent
       ],
     }).compileComponents();
   }));
