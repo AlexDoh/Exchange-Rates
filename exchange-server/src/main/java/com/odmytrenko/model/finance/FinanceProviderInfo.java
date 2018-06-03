@@ -56,7 +56,7 @@ public class FinanceProviderInfo extends ExchangeProvider {
     @MapKeyColumn(name = "CURRENCY")
     @Column(name = "DESCRIPTION")
     private Map<String, String> currencies;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "PROVIDER_ID")
     private List<FinanceOrganization> organizations;
 }
