@@ -29,8 +29,8 @@ import java.util.Map;
 @PrimaryKeyJoinColumn(name = "KURS_ORGANIZATION_ID", referencedColumnName = "ID")
 public class KursOrganization extends ExchangeOrganization {
 
-    @MapKeyColumn(name = "TYPE")
     @JsonManagedReference
+    @MapKeyColumn(name = "TYPE")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ORGANIZATION_ID")
     private Map<String, KursCurrencyRates> currencies;

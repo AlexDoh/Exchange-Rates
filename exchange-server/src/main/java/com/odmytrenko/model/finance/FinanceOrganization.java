@@ -33,8 +33,8 @@ public class FinanceOrganization extends ExchangeOrganization {
     private Boolean branch;
     private String regionId;
     private String cityId;
-    @MapKeyColumn(name = "TYPE")
     @JsonManagedReference
+    @MapKeyColumn(name = "TYPE")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "organization")
     private Map<String, FinanceCurrencyRates> currencies;
     @JsonBackReference

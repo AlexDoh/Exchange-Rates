@@ -1,6 +1,7 @@
 package com.odmytrenko.model.kurs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class KursProviderInfo extends ExchangeProvider {
     private Map<String, String> orgTypes;
     @Transient
     private Map<String, String> currencies;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "PROVIDER_ID")
     private List<KursOrganization> organizations;

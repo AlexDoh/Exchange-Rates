@@ -1,6 +1,7 @@
 package com.odmytrenko.model.finance;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.odmytrenko.model.ExchangeProvider;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -56,6 +57,7 @@ public class FinanceProviderInfo extends ExchangeProvider {
     @MapKeyColumn(name = "CURRENCY")
     @Column(name = "DESCRIPTION")
     private Map<String, String> currencies;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "PROVIDER_ID")
     private List<FinanceOrganization> organizations;
