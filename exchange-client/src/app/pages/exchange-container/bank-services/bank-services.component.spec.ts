@@ -12,11 +12,11 @@ describe('BankServicesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
+      declarations: [ BankServicesComponent ],
       providers: [
         ExchangeService,
         ProviderService
-      ],
-      declarations: [ BankServicesComponent ]
+      ]
     })
       .compileComponents();
   }));

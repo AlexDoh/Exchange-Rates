@@ -7,6 +7,10 @@ import { BankTableComponent } from './bank-table/bank-table.component';
 import { MatSpinner } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderPipe } from 'ngx-order-pipe';
+import { ExchangeService } from '../../shared/services/rest/exchange.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UtilsService } from '../../shared/services/utils.service';
+import { ProviderService } from "../../shared/services/message/provider.service";
 
 describe('CenterContainerComponent', () => {
   let component: ExchangeContainerComponent;
@@ -14,7 +18,10 @@ describe('CenterContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ReactiveFormsModule ],
+      imports: [
+        ReactiveFormsModule,
+        HttpClientTestingModule
+      ],
       declarations: [
         ExchangeContainerComponent,
         LeftSidebarComponent,
@@ -22,6 +29,11 @@ describe('CenterContainerComponent', () => {
         BankTableComponent,
         MatSpinner,
         OrderPipe
+      ],
+      providers: [
+        ExchangeService,
+        ProviderService,
+        UtilsService
       ]
     })
       .compileComponents();

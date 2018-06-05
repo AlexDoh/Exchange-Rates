@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BankTableComponent } from './bank-table.component';
 import { MatSpinner } from '@angular/material';
 import { OrderPipe } from 'ngx-order-pipe';
+import { ProviderService } from '../../../shared/services/message/provider.service';
+import { ExchangeService } from '../../../shared/services/rest/exchange.service';
 
 describe('BankTableComponent', () => {
   let component: BankTableComponent;
@@ -14,7 +16,11 @@ describe('BankTableComponent', () => {
         BankTableComponent,
         MatSpinner,
         OrderPipe
-      ]
+      ],
+      providers: [
+        ExchangeService,
+        ProviderService
+      ],
     })
       .compileComponents();
   }));
