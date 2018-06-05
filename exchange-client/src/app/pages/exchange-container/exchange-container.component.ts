@@ -4,6 +4,7 @@ import { ExchangeInfo } from '../../models/exchange-info';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UtilsService } from '../../shared/services/utils.service';
 import { ProviderService } from '../../shared/services/message/provider.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-exchange-container',
@@ -30,10 +31,16 @@ export class ExchangeContainerComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.providerService.changeProviderSubject.subscribe(exchangeData => {
-      this.providerService.changeCurrencySubject.next(this.selectedCurrency);
-      this.changeProvider(exchangeData);
-    });
+    this.providerService.changeProviderSubject.subscribe(
+      (exchangeData: ExchangeInfo) => {
+        if (Object.keys(exchangeData).length !== 0) {
+          this.providerService.changeCurrencySubject.next(this.selectedCurrency);
+          this.changeProvider(exchangeData);
+        }
+      },
+      (err: HttpErrorResponse) => {
+      }
+    );
   }
 
   get priorityCurrenciesArray(): Array<[ string, string ]> {

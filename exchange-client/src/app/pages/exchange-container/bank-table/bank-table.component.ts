@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExchangeInfo } from '../../../models/exchange-info';
 import { ProviderService } from '../../../shared/services/message/provider.service';
-import { ExchangeService } from '../../../shared/services/rest/exchange.service';
 
 @Component({
   selector: 'app-bank-table',
@@ -16,6 +15,7 @@ export class BankTableComponent implements OnInit {
   column = 'title';
   minAsk: number;
   isLoading: boolean;
+  noProviderLoaded: boolean;
 
   constructor(private providerService: ProviderService) {
   }
@@ -28,11 +28,18 @@ export class BankTableComponent implements OnInit {
         this.setMinAskCurrency();
       }
     });
-    this.providerService.changeProviderSubject.subscribe(exchangeData => {
-      this.exchangeData = exchangeData;
-      this.setMinAskCurrency();
-      this.isLoading = false;
-    });
+    this.providerService.changeProviderSubject.subscribe(
+      (exchangeData: ExchangeInfo) => {
+        this.isLoading = false;
+        if (Object.keys(exchangeData).length !== 0) {
+          this.exchangeData = exchangeData;
+          this.setMinAskCurrency();
+        } else {
+          this.exchangeData = null;
+          this.noProviderLoaded = true;
+        }
+      }
+    );
   }
 
   sort(columnName): void {

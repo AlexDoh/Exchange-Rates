@@ -1,4 +1,4 @@
-<div class="table-responsive py-5" *ngIf="exchangeData">
+<div class="table-responsive py-5">
   <table class="table table-hover table-striped table-hover-darker">
     <thead class="thead-dark">
     <tr class="table__row">
@@ -42,7 +42,7 @@
     <div class="table__spinner" *ngIf="isLoading">
       <mat-spinner aria-label="Loading..."></mat-spinner>
     </div>
-    <tbody *ngIf="!isLoading">
+    <tbody *ngIf="exchangeData && !isLoading">
     <tr class="table__row" [class.highlighted]="+organization.currencies[currencyType].ask === minAsk"
         *ngFor="let organization of exchangeData.organizations | currency: currencyType | orderBy: column : isDesc">
       <td><a [href]="organization.link.replace('/cash', '')">{{organization.title}}</a></td>
@@ -52,5 +52,8 @@
       <td>{{organization.currencies[currencyType].ask}}</td>
     </tr>
     </tbody>
+    <div *ngIf="noProviderLoaded" class="text-center py-5">
+      <h2>При загрузке информации возникла ошибка</h2>
+    </div>
   </table>
 </div>
