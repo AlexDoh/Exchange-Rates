@@ -63,7 +63,6 @@
 
     <resources>
       <resource>
-        <!--<targetPath>client</targetPath>-->
         <filtering>false</filtering>
         <directory>dist</directory>
       </resource>
