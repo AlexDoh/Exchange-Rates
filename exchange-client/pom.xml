@@ -5,7 +5,6 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>exchange-client</artifactId>
-  <packaging>jar</packaging>
 
   <parent>
     <artifactId>exchange-rates</artifactId>
@@ -64,8 +63,9 @@
 
     <resources>
       <resource>
+        <!--<targetPath>client</targetPath>-->
         <filtering>false</filtering>
-        <directory>../exchange-server/src/main/resources/static</directory>
+        <directory>dist</directory>
       </resource>
     </resources>
   </build>

@@ -14,9 +14,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <UI.files.folder>${project.build.directory}</UI.files.folder>
-        <maven.clean.version>3.0.0</maven.clean.version>
-        <maven.dependency.version>3.0.2</maven.dependency.version>
+        <frontend.build.directory>${project.basedir}/../exchange-client/target/classes</frontend.build.directory>
+        <springboot.runner.class>com.odmytrenko.configuration.WebAppn</springboot.runner.class>
     </properties>
 
     <dependencies>
@@ -29,70 +28,28 @@
 
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<version>${maven.dependency.version}</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>unpack</id>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>unpack-dependencies</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<includeGroupIds>${project.groupId}</includeGroupIds>-->
-                            <!--<includeArtifactIds>${frontend.artifact.id}</includeArtifactIds>-->
-                            <!--<outputDirectory>${UI.files.folder}</outputDirectory>-->
-                            <!--<excludes>META-INF/**</excludes>-->
-                            <!--<overWriteReleases>true</overWriteReleases>-->
-                            <!--<overWriteSnapshots>true</overWriteSnapshots>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven.clean.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                            <filesets>
-                                <fileset>
-                                    <directory>${UI.files.folder}</directory>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.odmytrenko.configuration.WebAppn</mainClass>
+                    <mainClass>${springboot.runner.class}</mainClass>
                     <classifier>exec</classifier>
                     <excludeArtifactIds>${frontend.artifact.id}</excludeArtifactIds>
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.1</version>
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>src/main/resources/static</directory>
+                            <directory>${frontend.build.directory}</directory>
                         </resource>
                     </webResources>
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>rates</finalName>
     </build>
 
 </project>
