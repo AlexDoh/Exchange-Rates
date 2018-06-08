@@ -11,10 +11,10 @@
     </parent>
 
     <artifactId>exchange-server</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
-        <UI.files.folder>${project.build.directory}/classes/static</UI.files.folder>
+        <UI.files.folder>${project.build.directory}</UI.files.folder>
         <maven.clean.version>3.0.0</maven.clean.version>
         <maven.dependency.version>3.0.2</maven.dependency.version>
     </properties>
@@ -29,28 +29,28 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven.dependency.version}</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeGroupIds>${project.groupId}</includeGroupIds>
-                            <includeArtifactIds>${frontend.artifact.id}</includeArtifactIds>
-                            <outputDirectory>${UI.files.folder}</outputDirectory>
-                            <excludes>META-INF/**</excludes>
-                            <overWriteReleases>true</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-dependency-plugin</artifactId>-->
+                <!--<version>${maven.dependency.version}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>unpack</id>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>unpack-dependencies</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<includeGroupIds>${project.groupId}</includeGroupIds>-->
+                            <!--<includeArtifactIds>${frontend.artifact.id}</includeArtifactIds>-->
+                            <!--<outputDirectory>${UI.files.folder}</outputDirectory>-->
+                            <!--<excludes>META-INF/**</excludes>-->
+                            <!--<overWriteReleases>true</overWriteReleases>-->
+                            <!--<overWriteSnapshots>true</overWriteSnapshots>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -79,6 +79,17 @@
                     <mainClass>com.odmytrenko.configuration.WebAppn</mainClass>
                     <classifier>exec</classifier>
                     <excludeArtifactIds>${frontend.artifact.id}</excludeArtifactIds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources/static</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
