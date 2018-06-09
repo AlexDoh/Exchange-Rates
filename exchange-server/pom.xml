@@ -49,7 +49,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>rates</finalName>
+        <finalName>ROOT</finalName>
     </build>
 
 </project>
